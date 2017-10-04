@@ -1,0 +1,24 @@
+version: "2.0"
+
+services:
+  sonarqube:
+    image: marcopas/docker-sonarqube
+    ports:
+     - "9000:9000"
+    links:
+      - postgres
+    environment:
+     - SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonar
+     - SONARQUBE_JDBC_USERNAME=sonar
+     - SONARQUBE_JDBC_PASSWORD=sonar
+     
+  postgres:
+    image: postgres:9.5.3
+    ports:
+      - "5432:5432"
+    volumes:
+      - /var/lib/postgresql/data
+    environment:
+     - POSTGRES_USER=sonar
+     - POSTGRES_PASSWORD=sonar
+
