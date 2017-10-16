@@ -1,5 +1,8 @@
 #!/bin/bash
 
+  git config --global user.email "jenkins@localhost"
+  git config --global user.name "localhost"
+
 while [ $# -gt 0 ]; do
 
    if [[ $1 == *"--"* ]]; then
@@ -11,8 +14,6 @@ while [ $# -gt 0 ]; do
 done
 
 
-
-  
 if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
