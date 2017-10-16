@@ -13,35 +13,16 @@ done
 if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
-ls
-
 ./../dependency-check/bin/dependency-check.sh --project $projectFolder  --format "XML" --out . --scan $sourceToScan/**
-
-if [ -d $resultFolder ]; then rm -rf $resultFolder; fi
-git clone $resultRepo
-
-
-cp dependency-check-report.xml $resultFolder
-
-cd $resultFolder
-
-#git config --global user.email "you@example.com"
-#git config --global user.name "Your Name"
-git init
-git add -A
-git commit -m "From dependency-check"
-git push https://$username:$password@github.com/RiiecCo/results.git 
+curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml" 'https://172.17.0.1:8443/threadfix/rest/applications/1/upload?apiKey={7M8Uw9RLqkobJJe1rcIHElOSGbTuAAuUHHNpgmMVP58}'
 
 : <<'END'
 Tool usage example:
 
 sudo docker run dep  \
---sourceRepo https://github.com/RiieCco/dockertools.git \
---projectFolder dockertools/testable-code \
---sourceToScan dockertools/testable-code/pythonflask \
---resultRepo http://github.com/riiecco/results.git \
---resultFolder results \
---username Riiecco \
---password Lakers112
+--sourceRepo ${value["repository"]} \
+--projectFolder ${value["projectFolder"]} \
+--sourceToScan ${value["sourceToScan"]} \
+--resultSource ${value["resultSource"]}
 
 END
