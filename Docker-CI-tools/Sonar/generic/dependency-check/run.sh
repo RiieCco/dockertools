@@ -1,8 +1,5 @@
 #!/bin/bash
 
-  git config --global user.email "jenkins@localhost"
-  git config --global user.name "localhost"
-
 while [ $# -gt 0 ]; do
 
    if [[ $1 == *"--"* ]]; then
