@@ -10,6 +10,10 @@ while [ $# -gt 0 ]; do
   shift
 done
 
+
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+  
 if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
