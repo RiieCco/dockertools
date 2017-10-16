@@ -14,8 +14,6 @@ done
 
   
 if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
-git config --global user.email "r.tencate77@gmail.com"
-git config --global user.name "Riiecco"
 git clone $sourceRepo
 
 ./../dependency-check/bin/dependency-check.sh --project $projectFolder  --format "XML" --out . --scan $sourceToScan/**
