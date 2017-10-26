@@ -29,17 +29,4 @@ sudo docker run retire  \
 --sourceToScan testable-code/pythonflask \
 --resultSource https://172.17.0.1:8443/threadfix/rest/applications/1/upload?apiKey={7M8Uw9RLqkobJJe1rcIHElOSGbTuAAuUHHNpgmMVP58}
 
-
-, {
-	"name": "retirejs",
-	"buildFileLocation": "security/retireJS",
-	"trigger": "",
-	"repository": "https://github.com/blabla1337/skf-flask.git",
-	"projectFolder": "skf-flask/Angular",
-	"sourceToScan": "skf-flask/Angular",
-	"gitSecret": "",
-	"toolAPISecret": "",
-	"resultSource": "https://threadfix.com/threadfix"
-}
-
 END
