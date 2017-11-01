@@ -20,6 +20,7 @@ apikey = results.zapkey # Change to match the API key set in ZAP, or use None if
 
 # By default ZAP API client will connect to port 8080
 zap = ZAPv2(apikey=apikey)
+
 # Use the line below if ZAP is not listening on port 8080, for example, if listening on port 8090
 zap = ZAPv2(apikey=apikey, proxies={'http': results.proxy, 'https': results.proxy})
 
@@ -27,14 +28,21 @@ zap = ZAPv2(apikey=apikey, proxies={'http': results.proxy, 'https': results.prox
 print 'Accessing target %s' % target
 # try have a unique enough session...
 
+
+
 zap.urlopen(target)
 # Give the sites tree a chance to get updated
 time.sleep(2)
 
-zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
-zap.openapi.import_url(results.swagger, hostoverride='localhost', apikey=apikey)
+rule = zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
+print 'rule was added %s' % rule
 
-print 'Scanning target %s' % target
+
+swagger = zap.openapi.import_url(results.swagger, hostoverride='demo.securityknowledgeframework.org', apikey=apikey)
+print 'swagger file was imported %s' % swagger
+
+
+
 scanid = zap.ascan.scan(target)
 while (int(zap.ascan.status(scanid)) < 100):
     print 'Scan progress %: ' + zap.ascan.status(scanid)
