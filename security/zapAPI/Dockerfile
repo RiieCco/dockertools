@@ -7,16 +7,14 @@ RUN apt-get update && apt-get install -q -y --fix-missing \
 	wget \
 	curl \
 	git \
-	openbox \
-	python-pip \
-	apt-get clean && \
-	rm -rf /var/lib/apt/lists/*
+	python-pip
 
-RUN pip install --upgrade pip zapcli python-owasp-zap-v2.4
+RUN pip install python-owasp-zap-v2.4
 
 COPY run.sh /
-COPY api-scan-auth-header.py / 
+COPY api-scan-auth-header.py /
 
 RUN ["chmod", "+x", "/run.sh"]
+RUN ["chmod", "+x", "/api-scan-auth-header.py"]
 
 ENTRYPOINT ["/run.sh"]
