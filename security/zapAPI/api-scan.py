@@ -7,10 +7,10 @@ from zapv2 import ZAPv2
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--zap_key',  action='store', dest='zapkey', help='provide the owasp zap api key - [trrpvf26kvicie9jq83ig8hghd]')
-parser.add_argument('--zap_proxy', action='store', dest='proxy', help='specify zap procy ip and port - [http://127.0.0.1:8082]')
-parser.add_argument('--target',  action='store', dest='target', help='specify the target to scan - [http://example.com]')
-parser.add_argument('--swagger', action='store', dest='swagger', help='specify the url where the swagger file lives - [http://example.com/api/swagger.json]' )
+parser.add_argument('--zap_key',  action='store', dest='zapkey', help='Provide the ZAP api key - [trrpvf26kvicie9jq83ig8hghd]')
+parser.add_argument('--zap_proxy', action='store', dest='proxy', help='Provide ZAP proxy ip / port - [http://127.0.0.1:8082]')
+parser.add_argument('--target',  action='store', dest='target', help='Provide the target to scan - [http://example.com]')
+parser.add_argument('--swagger', action='store', dest='swagger', help='Provide swagger file - [http://example.com/api/swagger.json]' )
 
 results = parser.parse_args()
 
