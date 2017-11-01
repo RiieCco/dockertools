@@ -28,8 +28,6 @@ zap = ZAPv2(apikey=apikey, proxies={'http': results.proxy, 'https': results.prox
 print 'Accessing target %s' % target
 # try have a unique enough session...
 
-
-
 zap.urlopen(target)
 # Give the sites tree a chance to get updated
 time.sleep(2)
