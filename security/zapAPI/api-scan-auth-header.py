@@ -48,6 +48,7 @@ print 'Hosts: ' + ', '.join(zap.core.hosts)
 print 'Alerts: '
 pprint (zap.core.alerts())
 
-zap.core.xmlreport(apikey)
+report = zap.core.xmlreport(apikey)
+print(report)
 
 zap.replacer.remove_rule("Authorization header", apikey)
