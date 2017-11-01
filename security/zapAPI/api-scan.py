@@ -20,7 +20,7 @@ apikey = results.zapkey # Change to match the API key set in ZAP, or use None if
 # By default ZAP API client will connect to port 8080
 zap = ZAPv2(apikey=apikey)
 # Use the line below if ZAP is not listening on port 8080, for example, if listening on port 8090
-zap = ZAPv2(apikey=apikey, proxies={'http': 'http://127.0.0.1:8082', 'https': 'http://127.0.0.1:8082'})
+zap = ZAPv2(apikey=apikey, proxies={'http': results.proxy, 'https': results.proxy})
 
 # do stuff
 print 'Accessing target %s' % target
@@ -31,7 +31,7 @@ zap.urlopen(target)
 time.sleep(2)
 
 zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.authorization, "", apikey)
-zap.openapi.import_url('https://localhost/api/swagger.json', hostoverride='localhost', apikey=apikey)
+zap.openapi.import_url(results.swagger, hostoverride='localhost', apikey=apikey)
 
 print 'Scanning target %s' % target
 scanid = zap.ascan.scan(target)
