@@ -11,6 +11,7 @@ parser.add_argument('--zap_key',  action='store', dest='zapkey', help='Provide t
 parser.add_argument('--zap_proxy', action='store', dest='proxy', help='Provide ZAP proxy ip / port - [http://127.0.0.1:8082]')
 parser.add_argument('--target',  action='store', dest='target', help='Provide the target to scan - [http://example.com]')
 parser.add_argument('--swagger', action='store', dest='swagger', help='Provide swagger file - [http://example.com/api/swagger.json]' )
+parser.add_argument('--auth_token', action='store', dest='token', help='Authorization token' )
 
 results = parser.parse_args()
 
@@ -30,7 +31,7 @@ zap.urlopen(target)
 # Give the sites tree a chance to get updated
 time.sleep(2)
 
-zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.authorization, "", apikey)
+zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
 zap.openapi.import_url(results.swagger, hostoverride='localhost', apikey=apikey)
 
 print 'Scanning target %s' % target
@@ -48,3 +49,5 @@ print 'Alerts: '
 pprint (zap.core.alerts())
 
 zap.core.xmlreport(apikey)
+
+zap.replacer.remove_rule("Authorization header", apikey)
