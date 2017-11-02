@@ -1,4 +1,3 @@
-clear
 #!/bin/bash
 
 while [ $# -gt 0 ]; do
