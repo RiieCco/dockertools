@@ -18,7 +18,7 @@ cd $sourceToScan
 
 retire
 
-curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
+#curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
 : <<'END'
 Tool usage example:
