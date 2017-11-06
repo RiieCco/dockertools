@@ -13,16 +13,11 @@ done
 if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
-ls -lart
-
-cd fedex-tnt
-
-: <<'END'
 #klant specifiek
 cd fedex-tnt/tools
 ./npm-install.sh
 
-cd ../
+cd ../../
 
 cd $projectFolder
 ls -lart
@@ -49,7 +44,7 @@ npm run e2e
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
-
+: <<'END'
 Tool usage example:
 
 sudo docker run retire  \
