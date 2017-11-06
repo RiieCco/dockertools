@@ -18,6 +18,7 @@ cd $sourceToScan
 ls -lart
 
 npm install -g retire
+npm install
 retire
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
