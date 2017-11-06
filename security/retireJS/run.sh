@@ -32,6 +32,7 @@ nsp check --output summary
 echo "nsp is done"
 
 #klant specifiek
+npm start
 npm run e2e
 #klant specifiek
 
