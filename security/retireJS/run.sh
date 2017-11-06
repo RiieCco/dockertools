@@ -31,7 +31,7 @@ echo "retire is done"
 nsp check --output summary
 echo "nsp is done"
 
-gulp e2e
+npm run
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
