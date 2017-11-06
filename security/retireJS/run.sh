@@ -15,6 +15,7 @@ git clone $sourceRepo
 
 ls - lart
 
+: <<'END'
 #klant specifiek
 cd fedex-tnt/tools
 ./npm-install.sh
@@ -46,7 +47,7 @@ npm run e2e
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
-: <<'END'
+
 Tool usage example:
 
 sudo docker run retire  \
