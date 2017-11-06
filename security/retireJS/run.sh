@@ -15,6 +15,8 @@ git clone $sourceRepo
 
 ls -lart
 
+cd fedex-tnt
+
 : <<'END'
 #klant specifiek
 cd fedex-tnt/tools
