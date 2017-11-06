@@ -14,7 +14,7 @@ if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
 #klant specifiek
-cd tools
+cd fedex-tnt/tools
 ./npm-install.sh
 
 cd ../
