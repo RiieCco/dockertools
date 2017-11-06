@@ -33,6 +33,7 @@ echo "nsp is done"
 
 #klant specifiek
 npm start
+npm run
 npm run e2e
 #klant specifiek
 
