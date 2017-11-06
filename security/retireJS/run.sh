@@ -14,19 +14,17 @@ if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
 #klant specifiek
-#cd $projectFolder
-#ls -lart
-#npm install
+cd $projectFolder
+ls -lart
+npm install
 
-
-#cd $install
-#ls -lart
-#npm install
-#klant specifiek
 
 cd $sourceToScan
-npm install
 ls -lart
+npm install
+#klant specifiek
+
+
 retire
 echo "retire is done"
 
