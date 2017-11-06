@@ -13,11 +13,11 @@ done
 if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
-//klant specifiek
+#klant specifiek
 cd $projectFolder
 ls -lart
 npm install
-//klant specifiek
+#klant specifiek
 
 cd $sourceToScan
 
