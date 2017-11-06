@@ -15,6 +15,8 @@ git clone $sourceRepo
 
 cd $sourceToScan
 
+ls -lart
+
 retire
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
