@@ -29,7 +29,6 @@ ls -lart
 npm install
 #klant specifiek
 
-
 retire
 echo "retire is done"
 
