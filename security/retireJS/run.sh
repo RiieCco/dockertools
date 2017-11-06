@@ -14,15 +14,15 @@ if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
 #klant specifiek
+
+npm install --save gulp-install
+
 cd fedex-tnt/tools
 ./npm-install.sh
-
-cd ../../
 
 cd $projectFolder
 ls -lart
 npm install
-
 
 cd $sourceToScan
 ls -lart
@@ -36,18 +36,6 @@ echo "retire is done"
 nsp check --output summary
 echo "nsp is done"
 
-ls -lart
-echo "wats deze hier"
-echo "wats deze hier"
-echo "wats deze hier"
-echo "wats deze hier"
-echo "wats deze hier"
-echo "wats deze hier"
-echo "wats deze hier"
-echo "wats deze hier"
-echo "wats deze hier"
-echo "wats deze hier"
-echo "wats deze hier"
 
 #klant specifiek
 npm start
