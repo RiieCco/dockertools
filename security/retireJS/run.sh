@@ -13,7 +13,7 @@ done
 if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
-ls - lart
+ls -lart
 
 : <<'END'
 #klant specifiek
