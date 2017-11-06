@@ -17,13 +17,15 @@ git clone $sourceRepo
 cd $projectFolder
 ls -lart
 npm install
+
+
+cd $install
+ls -lart
+npm install
 #klant specifiek
 
 cd $sourceToScan
-
 ls -lart
-
-npm install
 retire
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
