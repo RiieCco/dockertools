@@ -15,7 +15,10 @@ if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
 ./../dependency-check/bin/dependency-check.sh --project $projectFolder  --format "XML" --out . --scan $sourceToScan/**
-curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml" 'https://172.17.0.1:8443/threadfix/rest/applications/1/upload?apiKey={7M8Uw9RLqkobJJe1rcIHElOSGbTuAAuUHHNpgmMVP58}'
+
+
+cat dependency-check-report.xml
+#curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml" 'https://172.17.0.1:8443/threadfix/rest/applications/1/upload?apiKey={7M8Uw9RLqkobJJe1rcIHElOSGbTuAAuUHHNpgmMVP58}'
 
 : <<'END'
 Tool usage example:
