@@ -14,6 +14,11 @@ if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
 #klant specifiek
+cd tools
+./npm-install.sh
+
+cd ../
+
 cd $projectFolder
 ls -lart
 npm install
