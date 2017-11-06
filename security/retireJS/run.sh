@@ -22,8 +22,6 @@ npm install
 cd $sourceToScan
 ls -lart
 npm install
-npm install gulp-cli -g
-npm install gulp -D
 #klant specifiek
 
 
@@ -34,9 +32,7 @@ nsp check --output summary
 echo "nsp is done"
 
 #klant specifiek
-npm run unit
-echo "wats deze"
-gulp e2e --ci
+npm run e2e-ci
 #klant specifiek
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
