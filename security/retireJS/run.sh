@@ -34,7 +34,7 @@ nsp check --output summary
 echo "nsp is done"
 
 #klant specifiek
-gulp e2e
+npm run e2e-ci
 #klant specifiek
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
