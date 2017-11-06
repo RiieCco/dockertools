@@ -17,7 +17,6 @@ cd $sourceToScan
 
 ls -lart
 
-npm install -g retire
 npm install
 retire
 
