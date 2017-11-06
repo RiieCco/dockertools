@@ -27,6 +27,11 @@ npm install
 cd $sourceToScan
 ls -lart
 retire
+echo "retire is done"
+
+nsp check --output summary
+echo "nsp is done"
+
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
