@@ -22,6 +22,8 @@ npm install
 cd $sourceToScan
 ls -lart
 npm install
+npm install gulp-cli -g
+npm install gulp -D
 #klant specifiek
 
 
@@ -31,7 +33,9 @@ echo "retire is done"
 nsp check --output summary
 echo "nsp is done"
 
-npm run
+#klant specifiek
+gulp e2e
+#klant specifiek
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
