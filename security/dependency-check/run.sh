@@ -14,7 +14,7 @@ done
 if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
-./../dependency-check/bin/dependency-check.sh --project $projectFolder  --format "XML" --out . --scan $sourceToScan/**
+./../dependency-check/bin/dependency-check.sh --project $projectFolder  --format "XML" --out . --enableExperimental --scan $sourceToScan/**
 
 
 cat dependency-check-report.xml
