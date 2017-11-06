@@ -36,6 +36,19 @@ echo "retire is done"
 nsp check --output summary
 echo "nsp is done"
 
+ls -lart
+echo "wats deze hier"
+echo "wats deze hier"
+echo "wats deze hier"
+echo "wats deze hier"
+echo "wats deze hier"
+echo "wats deze hier"
+echo "wats deze hier"
+echo "wats deze hier"
+echo "wats deze hier"
+echo "wats deze hier"
+echo "wats deze hier"
+
 #klant specifiek
 npm start
 npm run
