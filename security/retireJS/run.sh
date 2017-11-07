@@ -26,7 +26,9 @@ echo "@tntdigital:registry=https://tntdigital.artifactoryonline.com/tntdigital/a
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:_password=${artPassHash}
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:username=${artUser}
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:email=${artEmail}
-//tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:always-auth=true" > .npmrc
+//tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:always-auth=true" > ~/.npmrc
+
+cat ~/.npmrc
 
 npm config set registry https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
 
