@@ -30,8 +30,6 @@ echo "@tntdigital:registry=https://tntdigital.artifactoryonline.com/tntdigital/a
 
 npm config set @tnt-digital:registry https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
 
-npm login
-
 cd fedex-tnt/tools
 ./npm-install.sh
 
