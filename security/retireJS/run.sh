@@ -38,7 +38,7 @@ npm install
 retire
 echo "retire is done"
 
-npm run test
+gulp serve --stage=dev 
 #end costumer specific stuff here
 
 
