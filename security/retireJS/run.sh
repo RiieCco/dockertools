@@ -15,6 +15,12 @@ git clone $sourceRepo
 
 #klant specifiek
 
+echo "@tntdigital:registry=https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
+//tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:_password=${artPassHash}
+//tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:username=${artUser}
+//tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:email=${artEmail}
+//tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:always-auth=true" > .npmrc
+
 npm install --save gulp-install
 
 cd fedex-tnt/tools
