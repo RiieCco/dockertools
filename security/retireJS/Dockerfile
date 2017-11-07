@@ -1,5 +1,5 @@
 
-FROM node:4.3.1
+FROM node
 
 MAINTAINER Riccardo ten Cate <riccardo.ten.cate@owasp.org>
 
