@@ -22,17 +22,15 @@ export TNT_ARTIFACTORY_USER=$artUser
 export TNT_ARTIFACTORY_EMAIL=$artEmail
 export TNT_ARTIFACTORY_PASSWORD_HASH=$artPassHash
 
-
-
 echo "@tntdigital:registry=https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:_password=${artPassHash}
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:username=${artUser}
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:email=${artEmail}
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:always-auth=true" > ~/.npmrc
 
-cat ~/.npmrc
-
 npm config set registry https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
+
+npm login
 
 cd fedex-tnt/tools
 ./npm-install.sh
