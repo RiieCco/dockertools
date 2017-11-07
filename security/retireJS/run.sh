@@ -28,6 +28,8 @@ echo "@tntdigital:registry=https://tntdigital.artifactoryonline.com/tntdigital/a
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:email=${artEmail}
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:always-auth=true" > .npmrc
 
+npm config set registry https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
+
 npm install --save gulp-install
 
 cd fedex-tnt/tools
