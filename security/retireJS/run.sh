@@ -16,7 +16,8 @@ git clone $sourceRepo
 ls -lart
 
 
-#klant specifiek
+#normally npm install and use the "retire" command in src to scan is sufficient
+#here below is artifactory with NPM packages we need to authenticate to so we can install and check em
 
 export TNT_ARTIFACTORY_USER=$artUser
 export TNT_ARTIFACTORY_EMAIL=$artEmail
@@ -40,18 +41,13 @@ npm install
 cd $sourceToScan
 ls -lart
 npm install
-#klant specifiek
 
 retire
 echo "retire is done"
 
-nsp check --output summary
-echo "nsp is done"
-
-
-#klant specifiek
 npm run test
-#klant specifiek
+#end costumer specific stuff here
+
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
