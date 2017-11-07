@@ -51,8 +51,21 @@ echo "nsp is done"
 
 #klant specifiek
 npm start
+echo "start the application"
+echo "start the application"
+echo "start the application"
+echo "start the application"
 npm run
-npm run e2e
+echo "run available options"
+echo "run available options"
+echo "run available options"
+echo "run available options"
+npm run test
+echo "check dependencies"
+echo "check dependencies"
+echo "check dependencies"
+echo "check dependencies"
+echo "check dependencies"
 #klant specifiek
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
