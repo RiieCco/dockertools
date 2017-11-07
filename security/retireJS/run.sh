@@ -48,6 +48,11 @@ echo "retire is done"
 nsp check --output summary
 echo "nsp is done"
 
+echo "/////////////////////////////////"
+echo "/////////////////////////////////"
+npm install @tntdigital/mytnt-swagger
+echo "/////////////////////////////////"
+echo "/////////////////////////////////"
 
 #klant specifiek
 npm start
