@@ -48,11 +48,6 @@ echo "retire is done"
 nsp check --output summary
 echo "nsp is done"
 
-echo "/////////////////////////////////"
-echo "/////////////////////////////////"
-npm install @tnt-digital
-echo "/////////////////////////////////"
-echo "/////////////////////////////////"
 
 #klant specifiek
 npm start
@@ -65,7 +60,7 @@ echo "run available options"
 echo "run available options"
 echo "run available options"
 echo "run available options"
-npm run test
+npm run e2e
 echo "check dependencies"
 echo "check dependencies"
 echo "check dependencies"
