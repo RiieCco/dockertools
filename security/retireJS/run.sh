@@ -15,12 +15,14 @@ git clone $sourceRepo
 
 ls -lart
 
-export TNT_ARTIFACTORY_USER=$artUser
-export TNT_ARTIFACTORY_EMAIL=$artEmail
-export TNT_ARTIFACTORY_PASSWORD_HASH=$artPass
-
 
 #klant specifiek
+
+export TNT_ARTIFACTORY_USER=$artUser
+export TNT_ARTIFACTORY_EMAIL=$artEmail
+export TNT_ARTIFACTORY_PASSWORD_HASH=$artPassHash
+
+
 
 echo "@tntdigital:registry=https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
 //tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/:_password=${artPassHash}
