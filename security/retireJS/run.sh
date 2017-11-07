@@ -37,7 +37,7 @@ npm install
 
 retire
 echo "retire is done"
-
+npm install --global gulp-cli
 gulp serve --stage=dev 
 #end costumer specific stuff here
 
