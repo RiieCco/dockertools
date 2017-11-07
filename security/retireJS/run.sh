@@ -38,7 +38,13 @@ npm install
 retire
 echo "retire is done"
 npm install --global gulp-cli
-gulp serve --stage=dev 
+npm install gulp -g
+echo "after here the gulp serve is run"
+echo "after here the gulp serve is run"
+echo "after here the gulp serve is run"
+echo "after here the gulp serve is run"
+echo "after here the gulp serve is run"
+gulp serve 
 #end costumer specific stuff here
 
 
