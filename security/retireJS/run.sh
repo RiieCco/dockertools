@@ -30,8 +30,6 @@ echo "@tntdigital:registry=https://tntdigital.artifactoryonline.com/tntdigital/a
 
 npm config set registry https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
 
-npm install --save gulp-install
-
 cd fedex-tnt/tools
 ./npm-install.sh
 
