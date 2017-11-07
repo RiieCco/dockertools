@@ -15,11 +15,10 @@ git clone $sourceRepo
 
 ls -lart
 
-echo "export TNT_ARTIFACTORY_USER=$username" > .bashrc
-echo "export TNT_ARTIFACTORY_EMAIL=$email" > .bashrc
-echo "export TNT_ARTIFACTORY_PASSWORD_HASH=$password > .bashrc
+export TNT_ARTIFACTORY_USER=$artUser
+export TNT_ARTIFACTORY_EMAIL=$artEmail
+export TNT_ARTIFACTORY_PASSWORD_HASH=$artPass
 
-cat .bashrc
 
 #klant specifiek
 
