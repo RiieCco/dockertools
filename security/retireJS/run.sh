@@ -13,6 +13,14 @@ done
 if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
+ls -lart
+
+echo "export TNT_ARTIFACTORY_USER=$username" > .bashrc
+echo "export TNT_ARTIFACTORY_EMAIL=$email" > .bashrc
+echo "export TNT_ARTIFACTORY_PASSWORD_HASH=$password > .bashrc
+
+cat .bashrc
+
 #klant specifiek
 
 echo "@tntdigital:registry=https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
