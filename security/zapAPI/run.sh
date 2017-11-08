@@ -16,7 +16,7 @@ python api-scan-auth-header.py --zap_key $zap_key --zap_proxy $zap_proxy --targe
 ls -lart
 
 
-curl --insecure -H 'Accept: application/json' -X POST --form "file=@./zap-report.xml" $sourceReporting
+curl --insecure -H 'Accept: application/json' -X POST --form "file=@./zap-report.xml" 'https://10.203.189.152:8443/threadfix/rest/applications/1/upload?apiKey={u2MyXGgXw0UQmcmBBPx0Q2xKgPF7XrMEup2mn36Q6s}'
 
 : <<'END'
 Tool usage example:
