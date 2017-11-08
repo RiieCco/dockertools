@@ -15,6 +15,8 @@ python api-scan-auth-header.py --zap_key $zap_key --zap_proxy $zap_proxy --targe
 
 ls -lart
 
+cat zap-report.xml
+
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
 : <<'END'
