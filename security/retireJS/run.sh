@@ -37,7 +37,7 @@ cd $sourceToScan
 ls -lart
 npm install
 
-retire --outputformat json --outputpath ./
+retire --outputformat json 
 
 echo "---------------------------------------------------retire is done---------------------------------------------------"
 
