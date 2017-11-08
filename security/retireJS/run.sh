@@ -52,6 +52,6 @@ sudo docker run retire  \
 --sourceRepo https://github.com/riiecco/dockertools.git \
 --projectFolder testable-code \
 --sourceToScan testable-code/pythonflask \
---resultSource https://172.17.0.1:8443/threadfix/rest/applications/1/upload?apiKey={7M8Uw9RLqkobJJe1rcIHElOSGbTuAAuUHHNpgmMVP58}
+--resultSource https://172.17.0.1:8443/threadfix/rest/applications/1/upload?apiKey={AgdLRap39VUEnBUajxZjoeKKunIv7psnBeH33vFfU}
 
 END
