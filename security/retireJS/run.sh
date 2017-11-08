@@ -37,21 +37,11 @@ cd $sourceToScan
 ls -lart
 npm install
 
-retire > results.txt
+retire --outputformat json --outputpath ./
 
 echo "---------------------------------------------------retire is done---------------------------------------------------"
 
-echo "ik ben de results cat swa!"
-echo "ik ben de results cat swa!"
-echo "ik ben de results cat swa!"
-echo "ik ben de results cat swa!"
 
-cat results.txt
-
-echo "ik ben de results cat swa!"
-echo "ik ben de results cat swa!"
-echo "ik ben de results cat swa!"
-echo "ik ben de results cat swa!"
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
