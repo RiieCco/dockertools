@@ -31,14 +31,16 @@ echo "@tntdigital:registry=https://tntdigital.artifactoryonline.com/tntdigital/a
 
 npm config set @tnt-digital:registry https://tntdigital.artifactoryonline.com/tntdigital/api/npm/npm-local/
 
+#end costumer specific stuff here
+
 cd $sourceToScan
 ls -lart
 npm install
 
 retire > results.txt
 echo "---------------------------------------------------retire is done---------------------------------------------------"
-#end costumer specific stuff here
 
+cat results.txt
 
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
