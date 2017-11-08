@@ -13,6 +13,8 @@ done
 
 python api-scan-auth-header.py --zap_key $zap_key --zap_proxy $zap_proxy --target $target --swagger $swagger --auth_token $auth_token
 
+ls -lart
+
 #curl --insecure -H 'Accept: application/json' -X POST --form "file=@./dependency-check-report.xml"
 
 : <<'END'
