@@ -39,8 +39,7 @@ retire
 echo "---------------------------------------------------retire is done---------------------------------------------------"
 nsp check --reporter json
 echo "---------------------------------------------------nsp is done ---------------------------------------------------"
-karma start karma.conf.js --browsers=Chrome --proxies./=http://e2e-chrome.localsite.com:80/
-
+npm start e2e
 #end costumer specific stuff here
 
 
