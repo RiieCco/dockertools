@@ -38,7 +38,13 @@ ls -lart
 npm install
 
 retire > results.txt
+
 echo "---------------------------------------------------retire is done---------------------------------------------------"
+
+echo "ik ben de results cat swa!"
+echo "ik ben de results cat swa!"
+echo "ik ben de results cat swa!"
+echo "ik ben de results cat swa!"
 
 cat results.txt
 
