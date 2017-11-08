@@ -36,15 +36,11 @@ ls -lart
 npm install
 
 retire
-echo "retire is done"
-npm install --global gulp-cli
-npm install gulp -g
-echo "after here the gulp serve is run"
-echo "after here the gulp serve is run"
-echo "after here the gulp serve is run"
-echo "after here the gulp serve is run"
-echo "after here the gulp serve is run"
-gulp serve 
+echo "---------------------------------------------------retire is done---------------------------------------------------"
+nsp check --reporter json
+echo "---------------------------------------------------nsp is done ---------------------------------------------------"
+npm start e2e-ci
+
 #end costumer specific stuff here
 
 
