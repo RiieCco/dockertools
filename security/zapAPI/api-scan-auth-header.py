@@ -35,8 +35,10 @@ time.sleep(2)
 rule = zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
 print 'rule was added %s' % rule
 
+ 
+override = target.split('://')
 
-swagger = zap.openapi.import_url(results.swagger, hostoverride='demo.securityknowledgeframework.org', apikey=apikey)
+swagger = zap.openapi.import_url(results.swagger, hostoverride=override[1], apikey=apikey)
 print 'swagger file was imported %s' % swagger
 
 
