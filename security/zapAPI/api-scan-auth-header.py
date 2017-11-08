@@ -40,7 +40,6 @@ swagger = zap.openapi.import_url(results.swagger, hostoverride='demo.securitykno
 print 'swagger file was imported %s' % swagger
 
 
-
 scanid = zap.ascan.scan(target)
 while (int(zap.ascan.status(scanid)) < 100):
     print 'Scan progress %: ' + zap.ascan.status(scanid)
@@ -55,6 +54,9 @@ print 'Alerts: '
 pprint (zap.core.alerts())
 
 report = zap.core.xmlreport(apikey)
-print(report)
+
+file = open('zap-report.xml', 'w')
+file.write(report)
+file.close()
 
 zap.replacer.remove_rule("Authorization header", apikey)
