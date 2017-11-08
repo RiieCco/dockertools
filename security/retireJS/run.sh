@@ -35,11 +35,8 @@ cd $sourceToScan
 ls -lart
 npm install
 
-retire
+retire > results.txt
 echo "---------------------------------------------------retire is done---------------------------------------------------"
-nsp check --reporter json
-echo "---------------------------------------------------nsp is done ---------------------------------------------------"
-npm start e2e
 #end costumer specific stuff here
 
 
