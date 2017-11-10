@@ -14,7 +14,6 @@ if [ -d $projectFolder ]; then rm -rf $projectFolder; fi
 git clone $sourceRepo
 
 cd $projectFolder
-trap 'sudo docker-compose stop' SIGINT
 sudo docker-compose run --rm --publish 9000:9000 app sbt it:test-only *UserApiRoutesIntegrationSpec
 
 python api-scan-auth-header.py --zap_key $zap_key --zap_proxy $zap_proxy --target $target --swagger $swagger --auth_token $auth_token
