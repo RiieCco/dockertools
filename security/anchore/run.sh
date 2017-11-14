@@ -16,8 +16,8 @@ done
 
 #analyzing and scanning the target
 anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url image list
-anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url image add jenkins:latest
-anchore-cli --json --u $anchor_user --p $anchor_pass --url $anchor_url image vuln jenkins:latest os
+anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url image add docker.io/library/debian:latest
+anchore-cli --json --u $anchor_user --p $anchor_pass --url $anchor_url image vuln docker.io/library/debian:latest os
 
 : <<'END'
 Tool usage example:
