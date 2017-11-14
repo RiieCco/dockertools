@@ -11,13 +11,13 @@ while [ $# -gt 0 ]; do
 done
 
 #authentication to the registry
-anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url registry add $registry_url $registry_user $registry_pass
-anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url registry get docker.tntdigital.io
+#anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url registry add $registry_url $registry_user $registry_pass
+#anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url registry get docker.tntdigital.io
 
 #analyzing and scanning the target
 anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url image list
-anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url image add docker.tntdigital.io/tnt/java-aspectjweaver:master
-anchore-cli --json --u $anchor_user --p $anchor_pass --url $anchor_url image vuln docker.tntdigital.io/tnt/java-aspectjweaver:master os
+anchore-cli --u $anchor_user --p $anchor_pass --url $anchor_url image add jenkins:latest
+anchore-cli --json --u $anchor_user --p $anchor_pass --url $anchor_url image vuln jenkins:latest os
 
 : <<'END'
 Tool usage example:
