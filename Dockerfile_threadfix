@@ -1,0 +1,32 @@
+FROM openjdk:8-jdk-alpine
+MAINTAINER Jeroen Willemsen <@jWillemsen>
+
+# Install wget
+RUN apk update && apk add bash && apk add wget
+
+# Install Dockerize (updated to work with latest version of dockerize for Alpine)
+ENV DOCKERIZE_VERSION v0.4.0
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && echo "9638b18ed10460812f38d6149df14eec86de665f37ff7460de8a5028d8a4bfa3  dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz" | sha256sum -c \
+    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+
+# Install Threadfix
+RUN mkdir Threadfix
+COPY Install /Threadfix
+
+# Extract the war to add proper configs
+
+WORKDIR /Threadfix/tomcat/webapps
+RUN pwd
+RUN mkdir /Threadfix/tomcat/webapps/threadfix
+WORKDIR /Threadfix/tomcat/webapps/threadfix
+COPY Install/jdbc.properties.tmpl /Threadfix/tomcat/webapps/threadfix/WEB-INF/classes/
+RUN echo "91aab2cc68512545958bd55b19dac60b865e2a0feae530e49c940e32e53a1f72  /Threadfix/tomcat/webapps/threadfix.war" | sha256sum -c \
+  && jar -xvf /Threadfix/tomcat/webapps/threadfix.war
+
+WORKDIR /Threadfix
+RUN chmod +x threadfix.sh
+EXPOSE 8443
+CMD ["/usr/local/bin/dockerize", "-template", "/Threadfix/tomcat/webapps/threadfix/WEB-INF/classes/jdbc.properties.tmpl:/Threadfix/tomcat/webapps/threadfix/WEB-INF/classes/jdbc.properties", "/Threadfix/threadfix.sh", "start"]
