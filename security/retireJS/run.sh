@@ -37,9 +37,9 @@ cd $sourceToScan
 ls -lart
 npm install
 
-nsp check --reporter json
+#nsp check --reporter json
 
-#retire --outputformat json 
+retire --outputformat json 
 
 echo "---------------------------------------------------retire is done---------------------------------------------------"
 
