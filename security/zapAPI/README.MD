@@ -1,9 +1,7 @@
 Download owasp ZAP from here:
-
 https://github.com/zaproxy/zaproxy/wiki/Downloads
 
 After installation owasp ZAP can be run headless in the commandline like:
-
 https://github.com/zaproxy/zap-core-help/wiki/HelpCmdline
 
 #first time to save session state (makes the app get smarter)
