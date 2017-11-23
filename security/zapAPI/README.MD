@@ -13,10 +13,12 @@ https://github.com/zaproxy/zap-core-help/wiki/HelpCmdline
 
 
 Tool usage example:
+```bash
   sudo docker run zap_api  \
-  --zap_key ASD235457rgfSfds \
+  --zap_key abc123 \
   --zap_proxy http://172.18.0.1:1234 \
   --target https://demo.securityknowledgeframework.org \
   --swagger https://demo.securityknowledgeframework.org/api/swagger.json \
   --auth_token eydfsgDFGHdgbdfjfhghj.dsgjkdg@234tdw57dsg.3590dsfl*45532dfs \
   --dasboard willbecomemyJIRAapilink
+```
