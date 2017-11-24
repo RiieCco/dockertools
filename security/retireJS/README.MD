@@ -2,14 +2,6 @@
 
 There is a plethora of JavaScript libraries for use on the web and in node.js apps out there. This greatly simplifies, but we need to stay update on security fixes. "Using Components with Known Vulnerabilities" is now a part of the OWASP Top 10 and insecure libraries can pose a huge risk for your webapp. The goal of Retire.js is to help you detect use of version with known vulnerabilities.
 
-Retire.js has these parts:
-
-A command line scanner
-A grunt plugin
-A Chrome extension
-A Firefox extension
-Burp and OWASP Zap plugin
-
 More information about RetireJS can be found here: [RetireJS](https://retirejs.github.io/retire.js/)
 
 ### This folder contains the guide to use the RetireJS container.
