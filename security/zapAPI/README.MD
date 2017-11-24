@@ -1,5 +1,6 @@
 # OWASP ZAP client
-[logo]: https://www.owasp.org/images/1/11/Zap128x128.png "OWASP ZAP"
+
+The OWASP Zed Attack Proxy (ZAP) is one of the world’s most popular free security tools and is actively maintained by hundreds of international volunteers*. It can help you automatically find security vulnerabilities in your web applications while you are developing and testing your applications. Its also a great tool for experienced pentesters to use for manual security testing.
 
 ### This folder contains the owasp ZAP client that communicates to the ZAP instance.
 
