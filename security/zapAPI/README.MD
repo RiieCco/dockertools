@@ -8,6 +8,8 @@ After installation owasp ZAP can be run headless in the commandline like:
 [OWASP Headless instructions](https://github.com/zaproxy/zap-core-help/wiki/HelpCmdline)
 
 
+
+
 #first time to save session state (makes the app get smarter)
 ```bash
 ./zap.sh -daemon -host <host> -port <port> -newsession <path> -config api.key=testingandwrestling -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
