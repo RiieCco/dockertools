@@ -3,7 +3,6 @@
 ### This folder contains the owasp ZAP client that communicates to the ZAP instance.
 
 The OWASP ZAP instance can be downloaded from here: [OWASP ZAP](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project)
-
 After installation owasp ZAP can be run headless in the commandline like:
 [OWASP Headless instructions](https://github.com/zaproxy/zap-core-help/wiki/HelpCmdline)
 
