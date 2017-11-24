@@ -1,3 +1,4 @@
+[logo]: https://www.owasp.org/images/1/11/Zap128x128.png "OWASP ZAP"
 # OWASP ZAP client
 
 ### This folder contains the owasp ZAP client that communicates to the ZAP instance.
