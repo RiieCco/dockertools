@@ -1,12 +1,14 @@
 # OWASP ZAP client
 
-## This folder contains the owasp ZAP client that communicates to the ZAP instance.
+### This folder contains the owasp ZAP client that communicates to the ZAP instance.
 
-### Download the owasp ZAP instance from here:
+#### Download the owasp ZAP instance from here:
 https://github.com/zaproxy/zaproxy/wiki/Downloads
 
-### After installation owasp ZAP can be run headless in the commandline like:
+
+#### After installation owasp ZAP can be run headless in the commandline like:
 https://github.com/zaproxy/zap-core-help/wiki/HelpCmdline
+
 
 #first time to save session state (makes the app get smarter)
 ```bash
@@ -16,6 +18,11 @@ https://github.com/zaproxy/zap-core-help/wiki/HelpCmdline
 #seccond time -newsession became -session and point it to the path
 ```bash
 ./zap.sh -daemon -host <host> -port <port> -session <path> -config api.key=testingandwrestling -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
+```
+
+#Run it with no session option to run with clean state
+```bash
+./zap.sh -daemon -host <host> -port <port> -config api.key=testingandwrestling -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
 ```
 
 Tool usage example:
