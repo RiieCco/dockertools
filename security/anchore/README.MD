@@ -2,7 +2,6 @@
 
 The Anchore CLI provides a command line interface on top of the Anchore Engine REST API.
 Using the Anchore CLI users can manage and inspect images, policies, subscriptions and registries.
-
 For further details on use of the Anchore CLI with the Anchore Engine please refer to the [Anchore engine WIKI](https://github.com/anchore/anchore-engine/wiki)
 
 
