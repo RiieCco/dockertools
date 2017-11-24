@@ -35,12 +35,12 @@ npm install
 ```
 Where to trigger the NPM install depends per project on the location of the build.
 
-For the scan to work we need to:
-1. First pull the source we want to scan for dependencies
+1. Pull the source we want to scan for dependencies
 2. Navigate to the src || root folder of the application. 
 3. Run NPM install if there are any NPM packages that need to be installed
 4. Run retire to start scanning for dependencies.
 
+For the scan to work we need to supply the following params to the docker container:
 Tool usage example:
 ```bash
 sudo docker run retire  \
