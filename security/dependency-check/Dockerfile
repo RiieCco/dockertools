@@ -2,18 +2,15 @@ FROM java:8
 
 MAINTAINER Riccardo ten Cate <riccardo.ten.cate@owasp.org>
 
-ENV user=dependencycheck
-ENV version_url=https://jeremylong.github.io/DependencyCheck/current.txt
-ENV download_url=https://dl.bintray.com/jeremy-long/owasp
+ENV VERSION_URL="https://jeremylong.github.io/DependencyCheck/current.txt"
+ENV DOWNLOAD_BASEURL="https://dl.bintray.com/jeremy-long/owasp"
 
-RUN wget -O /tmp/current.txt ${version_url} && \
- version=$(cat /tmp/current.txt) && \
- file="dependency-check-${version}-release.zip" && \
- wget "$download_url/$file" && \
- unzip ${file} && \
- rm ${file}
+COPY entrypoint.sh /
 
-COPY run.sh /
-RUN ["chmod", "+x", "/run.sh"]
+RUN mkdir -p /opt/dependency-check \
+ && wget -O /tmp/dependency-check-latest.zip "${DOWNLOAD_BASEURL}/dependency-check-$(wget -O - -o /dev/null "${VERSION_URL}")-release.zip" \
+ && unzip /tmp/dependency-check-latest.zip -d /opt \
+ && rm /tmp/dependency-check-latest.zip \
+ && chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["/entrypoint.sh"]

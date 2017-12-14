@@ -1,11 +1,7 @@
-
 FROM node
-
 MAINTAINER Riccardo ten Cate <riccardo.ten.cate@owasp.org>
-
 RUN npm install -g retire
 
-COPY run.sh /
-RUN ["chmod", "+x", "/run.sh"]
-
-ENTRYPOINT ["/run.sh"]
+COPY entrypoint.sh scripts/ /
+RUN chmod  +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
