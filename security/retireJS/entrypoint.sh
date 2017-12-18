@@ -34,7 +34,8 @@ main() {
     npm install
 
     #nsp check --reporter json
-    retire -p -j --outputformat json --outputpath "${RESULT_FILE}"
+    retire -p -j --outputformat json
+    retire --outputpath "${RESULT_FILE}" 
 }
 
 source_scripts() {
