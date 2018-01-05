@@ -40,8 +40,8 @@ main() {
 
     retire -p --outputformat json 
     retire --outputpath "${RESULT_FILE}"
-    ls -lart
+   
 }
 
 main
-ls -lart
+
