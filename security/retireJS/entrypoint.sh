@@ -7,7 +7,7 @@ exit_env_error() {
     exit 1
 }
 
-DEFAULT_RESULT_FILE="/tmp/$(hostname).results.json"
+DEFAULT_RESULT_FILE="$(hostname).results.json"
 RESULT_FILE="${RESULT_FILE:-${DEFAULT_RESULT_FILE}}"
 FOLDER="${FOLDER:-/application}"
 
