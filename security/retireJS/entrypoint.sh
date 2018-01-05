@@ -32,7 +32,9 @@ postResults() {
 }
 
 main() {
-ls -lart
+    if [ -d "${FOLDER}" ]; then rm -rf "${FOLDER}"; fi
+    git clone "${REPO}" "${FOLDER}"
+
 }
 
 main
