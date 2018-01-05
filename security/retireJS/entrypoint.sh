@@ -42,3 +42,4 @@ main() {
 }
 
 main
+ls -lart
