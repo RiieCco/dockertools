@@ -32,19 +32,7 @@ postResults() {
 }
 
 main() {
-    if [ -d "${FOLDER}" ]; then rm -rf "${FOLDER}"; fi
-    git clone "${REPO}" "${FOLDER}"
-
-    cd "${FOLDER}"
-    npm install
-
-    #nsp check --reporter json
-    retire -p
-    echo "output"
-    retire --outputpath "${RESULT_FILE}"
-    echo "path"
-    ls -lart
-    echo "ls part"
+ls -lart
 }
 
 main
