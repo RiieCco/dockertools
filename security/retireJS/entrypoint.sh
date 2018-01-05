@@ -31,7 +31,7 @@ postResults() {
     curl -H "Content-Type: application/json" -X GET  "${JIRA_PROXY_BASEURL}/SyncIssue/New?token=${JIRA_API_TOKEN}"
 }
 
-main() {
+
     if [ -d "${FOLDER}" ]; then rm -rf "${FOLDER}"; fi
     git clone "${REPO}" "${FOLDER}"
     
@@ -41,6 +41,5 @@ main() {
     retire -p --outputformat json 
     retire --outputpath "${RESULT_FILE}"
    
-}
 
-main
+
