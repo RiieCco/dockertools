@@ -38,7 +38,7 @@ main() {
     cd "${FOLDER}"
     npm install
 
-    retire -p --outputformat json
+    retire
 }
 
 main
