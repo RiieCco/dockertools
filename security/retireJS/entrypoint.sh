@@ -39,7 +39,7 @@ main() {
     npm install
 
     #nsp check --reporter json
-    retire --outputformat json
+    retire -p
     echo "output"
     retire --outputpath "${RESULT_FILE}"
     echo "path"
