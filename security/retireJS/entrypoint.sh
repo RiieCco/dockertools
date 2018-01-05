@@ -33,7 +33,7 @@ main() {
 
     #nsp check --reporter json
     retire -p --outputformat json
-    retire --outputpath foobar.json 
+    retire --outputpath "${RESULT_FILE}"
     ls -lart
 }
 
