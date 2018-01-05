@@ -13,24 +13,22 @@ FOLDER="${FOLDER:-/application}"
 
 [ -z "${REPO}" ] && exit_env_error REPO
 
-[ -z "${ARTIFACTORY_USER}" ] && exit_env_error ARTIFACTORY_USER
-[ -z "${ARTIFACTORY_EMAIL}" ] && exit_env_error ARTIFACTORY_EMAIL
-[ -z "${ARTIFACTORY_PWHASH}" ] && exit_env_error ARTIFACTORY_PWHASH
 
-[ -z "${JIRA_PROXY_BASEURL}" ] && exit_env_error JIRA_PROXY_BASEURL # http://172.17.0.1:1337/api
-[ -z "${JIRA_API_TOKEN}" ]  && exit_env_error JIRA_API_TOKEN
-[ -z "${JIRA_USER}" ]  && exit_env_error JIRA_USER
-[ -z "${JIRA_PASSWD}" ]  && exit_env_error JIRA_PASSWD
+#[ -z "${ARTIFACTORY_USER}" ] && exit_env_error ARTIFACTORY_USER
+#[ -z "${ARTIFACTORY_EMAIL}" ] && exit_env_error ARTIFACTORY_EMAIL
+#[ -z "${ARTIFACTORY_PWHASH}" ] && exit_env_error ARTIFACTORY_PWHASH
+
+#[ -z "${JIRA_PROXY_BASEURL}" ] && exit_env_error JIRA_PROXY_BASEURL # http://172.17.0.1:1337/api
+#[ -z "${JIRA_API_TOKEN}" ]  && exit_env_error JIRA_API_TOKEN
+#[ -z "${JIRA_USER}" ]  && exit_env_error JIRA_USER
+#[ -z "${JIRA_PASSWD}" ]  && exit_env_error JIRA_PASSWD
 
 
 main() {
     if [ -d "${FOLDER}" ]; then rm -rf "${FOLDER}"; fi
-
-    source_scripts pre_clone
     git clone "${REPO}" "${FOLDER}"
 
     cd "${FOLDER}"
-    source_scripts pre_install
     npm install
 
     #nsp check --reporter json
@@ -38,16 +36,6 @@ main() {
     retire --outputpath "${RESULT_FILE}" 
 }
 
-source_scripts() {
-    PHASE="${1}"
-
-    if [ -d "/scripts/${PHASE}" ]; then
-        for SRC_FILE in /scripts/${PHASE}/*.sh; do
-            echo "running ${SRC_FILE}"
-            source "${SRC_FILE}"
-        done
-    fi
-}
 
 postResults() {
     curl -H "Content-Type: application/json" -X POST -d "$(sprintf '{"username": "%s", "password":"%s"}' "${JIRA_USER}" "${JIRA_PASSWD}")" "${JIRA_PROXY_BASEURL}/Login?token=${JIRA_API_TOKEN}"
