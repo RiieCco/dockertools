@@ -38,7 +38,9 @@ main() {
     cd "${FOLDER}"
     npm install
 
-    retire
+    retire -p --outputformat json 
+    retire --outputpath "${RESULT_FILE}"
+    ls -lart
 }
 
 main
