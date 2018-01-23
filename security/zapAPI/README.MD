@@ -26,11 +26,11 @@ After installation owasp ZAP can be run headless in the commandline like:
 
 Tool usage example:
 ```bash
-  sudo docker run zap_api  \
-  --zap_key abc123 \
-  --zap_proxy http://172.18.0.1:1234 \
-  --target https://demo.securityknowledgeframework.org \
-  --swagger https://demo.securityknowledgeframework.org/api/swagger.json \
-  --auth_token eydfsgDFGHdgbdfjfhghj.dsgjkdg@234tdw57dsg.3590dsfl*45532dfs \
-  --dasboard willbecomemyJIRAapilink
+  sudo docker run \
+  -e ZAP_KEY=testing \
+  -e ZAP_PROXY=0.0.0.0 \
+  -e TARGET=http://172.17.0.1 \
+  -e SWAGGER=nonethistime\
+  -e AUTH_TOKEN=nonethistime \ 
+  zapAPI
 ```
