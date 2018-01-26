@@ -16,7 +16,7 @@ sudo docker pull owasp/zap2docker-stable
 
 #Run the ZAP docker 
 ```bash
-sudo docker run -u zap -p 8081:8081 -i owasp/zap2docker-stable zap.sh -daemon -host 0.0.0.0 -port 8081 -config api.key=testing -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true --installalladdons
+sudo docker run -u zap -p 8081:8081 -i owasp/zap2docker-stable zap.sh -daemon -host 0.0.0.0 -port 8081 -config api.key=testing -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
 ```
 
 
