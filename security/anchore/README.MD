@@ -18,13 +18,15 @@ from.
 
 Tool usage example:
 ```bash
-sudo docker run anchore  \
---anchor_user admin
---anchor_pass foobar
---anchor_url http://localhost/:8228/v1
---registry_user test
---registry_pass test
---registry_url https://docker.company.io
---images  docker.company.io/image:foo, docker.company.io/image:bar, etc
---resultSource http://jenkinsapi/push?token=abc123
+sudo docker   \
+-e ANCHOR_USER=admin
+-e ANCHOR_PASS=foobar
+-e ANCHOR_URL=http://localhost/:8228/v1
+-e REGISTRY_USER=test
+-e REGISTRY_PASS=test
+-e REGISTRY_URL=https://docker.company.io
+-e IMAGES= docker.io/library/debian:latest
+-e JIRA_USER=http://jenkinsapi/push?token=abc123
+-e JIRA_PASS=yettocome
+-e JIRA_URL=yettocome
 ```
