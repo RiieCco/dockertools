@@ -9,20 +9,17 @@ After installation owasp ZAP can be run headless in the commandline like:
 [OWASP Headless instructions](https://github.com/zaproxy/zap-core-help/wiki/HelpCmdline)
 
 
-#first time to save session state (makes the app get smarter)
+#Pull the ZAP docker
 ```bash
-./zap.sh -daemon -host <host> -port <port> -newsession <path> -config api.key=testingandwrestling -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
+sudo docker pull owasp/zap2docker-stable
 ```
 
-#seccond time -newsession became -session and point it to the path
+#Run the ZAP docker 
 ```bash
-./zap.sh -daemon -host <host> -port <port> -session <path> -config api.key=testingandwrestling -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
+sudo docker run -u zap -p 8081:8081 -i owasp/zap2docker-stable zap.sh -daemon -host 172.17.0.1 -port 8081 -config api.key=testing -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
 ```
 
-#Run it with no session option to run with clean state
-```bash
-./zap.sh -daemon -host <host> -port <port> -config api.key=testingandwrestling -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
-```
+
 
 Tool usage example:
 ```bash
