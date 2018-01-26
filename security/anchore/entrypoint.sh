@@ -21,21 +21,21 @@ ANCHORE_BIN=/usr/local/bin/anchore-cli
 #analyzing and scanning the target
 "${ANCHORE_BIN}" --u "${ANCHOR_USER}" --p "${ANCHOR_PASS}" --url "${ANCHOR_URL}" image list
 
-while IFS=',' read -ra ADDR; do
-      for i in "${ADDR[@]}"; do
-          echo "$i is scanning now"
-          "${ANCHORE_BIN}" --u "${ANCHOR_USER}" --p "${ANCHOR_PASS}" --url "${ANCHOR_URL}" image add "${IMAGES}"
-          echo "scan for $i is done"
+while IFS=',' read -ra IMAGE; do
+      for i in "${IMAGE[@]}"; do
+          echo "$i is added to list"
+          "${ANCHORE_BIN}" --u "${ANCHOR_USER}" --p "${ANCHOR_PASS}" --url "${ANCHOR_URL}" image add "$i"
+          echo "adding $i to list is done"
       done
  done <<< "${IMAGES}"
  
 #give the scanner some time to analyze al the images
 #sleep(240)
 
-while IFS=',' read -ra ADDR; do
-      for i in "${ADDR[@]}"; do
+while IFS=',' read -ra IMAGE; do
+      for i in "${IMAGE[@]}"; do
           echo "$i is scanning now"
-          "${ANCHORE_BIN}" --u "${ANCHOR_USER}" --p "${ANCHOR_PASS}" --url "${ANCHOR_URL}" --json image vuln "${IMAGES}" os
+          "${ANCHORE_BIN}" --u "${ANCHOR_USER}" --p "${ANCHOR_PASS}" --url "${ANCHOR_URL}" --json image vuln "$i" os
           echo "scan for $i is done"
       done
  done <<< "${IMAGES}"
