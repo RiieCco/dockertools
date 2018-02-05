@@ -6,12 +6,7 @@ More information about RetireJS can be found here: [RetireJS](https://retirejs.g
 
 ### This folder contains the guide to use the RetireJS container.
 
-The RetireJS is installable as an NPM package into the docker container itself that is done
-with the following simple command:
-
-
 Where to trigger the NPM install depends per project on the location of the build.
-
 For the scan to work we need to supply the following params to the docker container:
 
 1. The code source we want to scan for dependencies
