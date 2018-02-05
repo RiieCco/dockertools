@@ -24,6 +24,12 @@ FOLDER="${FOLDER:-/application}"
 #[ -z "${JIRA_PASSWD}" ]  && exit_env_error JIRA_PASSWD
 
 
+#export ARTIFACTORY_USER=${ARTIFACTORY_USER}
+#export ARTIFACTORY_EMAIL=${ARTIFACTORY_EMAIL}
+#export ARTIFACTORY_PASSWORD_HASH=${ARTIFACTORY_PWHASH}
+
+#npm config set @artifactory:registry https://company.artifactoryonline.com/company/api/npm/npm-local/
+
 if [ -d "${FOLDER}" ]; then rm -rf "${FOLDER}"; fi
 git clone "${REPO}" "${FOLDER}"
 
