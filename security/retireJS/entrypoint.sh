@@ -23,23 +23,22 @@ FOLDER="${FOLDER:-/application}"
 #[ -z "${JIRA_USER}" ]  && exit_env_error JIRA_USER
 #[ -z "${JIRA_PASSWD}" ]  && exit_env_error JIRA_PASSWD
 
-postResults() {
-    curl -H "Content-Type: application/json" -X POST -d "$(sprintf '{"username": "%s", "password":"%s"}' "${JIRA_USER}" "${JIRA_PASSWD}")" "${JIRA_PROXY_BASEURL}/Login?token=${JIRA_API_TOKEN}"
-    curl -H "Content-Type: application/json" -X GET "${JIRA_PROXY_BASEURL}/SyncIssue/Update?token=${JIRA_API_TOKEN}"
-    curl -H "Content-Type: application/json" -X POST --form "files=@${RESULT_FILE}" "${JIRA_PROXY_BASEURL}/RetireJS?token=${JIRA_API_TOKEN}"
-    curl -H "Content-Type: multipart/form-data" -X POST -F "files=@${RESULT_FILE};filename=retire.json" "${JIRA_PROXY_BASEURL}/RetireJS?token=${JIRA_API_TOKEN}"
-    curl -H "Content-Type: application/json" -X GET  "${JIRA_PROXY_BASEURL}/SyncIssue/New?token=${JIRA_API_TOKEN}"
-}
 
+if [ -d "${FOLDER}" ]; then rm -rf "${FOLDER}"; fi
+git clone "${REPO}" "${FOLDER}"
 
-    if [ -d "${FOLDER}" ]; then rm -rf "${FOLDER}"; fi
-    git clone "${REPO}" "${FOLDER}"
-    
-    cd "${FOLDER}"
-    npm install
+cd "${FOLDER}"
+npm install
 
-    retire -p --outputformat json 
-    retire --outputpath "${RESULT_FILE}"
+retire -p --outputformat json 
+retire --outputpath "${RESULT_FILE}"
+     
+#curl -H "Content-Type: application/json" -X POST -d "$(sprintf '{"username": "%s", "password":"%s"}' "${JIRA_USER}" "${JIRA_PASSWD}")" "${JIRA_PROXY_BASEURL}/Login?token=${JIRA_API_TOKEN}"
+#curl -H "Content-Type: application/json" -X GET "${JIRA_PROXY_BASEURL}/SyncIssue/Update?token=${JIRA_API_TOKEN}"
+#curl -H "Content-Type: application/json" -X POST --form "files=@${RESULT_FILE}" "${JIRA_PROXY_BASEURL}/RetireJS?token=${JIRA_API_TOKEN}"
+#curl -H "Content-Type: multipart/form-data" -X POST -F "files=@${RESULT_FILE};filename=retire.json" "${JIRA_PROXY_BASEURL}/RetireJS?token=${JIRA_API_TOKEN}"
+#curl -H "Content-Type: application/json" -X GET  "${JIRA_PROXY_BASEURL}/SyncIssue/New?token=${JIRA_API_TOKEN}"
+
    
 
 
