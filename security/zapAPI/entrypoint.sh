@@ -19,9 +19,10 @@ RESULT_FILE="/tmp/$$.$(hostname).results.json"
 #[ -z "${JIRA_API_TOKEN}" ]  && exit_env_error JIRA_API_TOKEN
 #[ -z "${JIRA_USER}" ]  && exit_env_error JIRA_USER
 #[ -z "${JIRA_PASSWD}" ]  && exit_env_error JIRA_PASSWD
-echo "do i even get to here?"
+
 python /api-scan-auth-header.py --zap_key "${ZAP_KEY}" --zap_proxy "${ZAP_PROXY}" --target "${TARGET}" --swagger "${SWAGGER}" --auth_token "${AUTH_TOKEN}"
 cat zap-report.xml
+
 # post to Jira
 #curl -H "Content-Type: application/json" -X POST -d "$(sprintf '{"username": "%s", "password":"%s"}' "${JIRA_USER}" "${JIRA_PASSWD}")" "${JIRA_PROXY_BASEURL}/Login?token=${JIRA_API_TOKEN}"
 #curl -H "Content-Type: application/json" -X GET "${JIRA_PROXY_BASEURL}/SyncIssue/Update?token=${JIRA_API_TOKEN}"
