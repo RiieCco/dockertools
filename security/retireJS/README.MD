@@ -9,30 +9,7 @@ More information about RetireJS can be found here: [RetireJS](https://retirejs.g
 The RetireJS is installable as an NPM package into the docker container itself that is done
 with the following simple command:
 
-```bash
-RUN npm install -g retire
-```
 
-#### Usage:
-
-The *run.sh* file might need some tinkering depending on the customer, some customers also have
-their own artifactory that might need to add the following code:
-
-```bash
-export ARTIFACTORY_USER=$artUser
-export ARTIFACTORY_EMAIL=$artEmail
-export ARTIFACTORY_PASSWORD_HASH=$artPassHash
-
-npm config set @artifactory:registry https://company.artifactoryonline.com/company/api/npm/npm-local/
-
-```
-
-Also, whenever there are no node packages that need to have dependency checking we
-can simply comment out the following line of code:
-
-```bash
-npm install
-```
 Where to trigger the NPM install depends per project on the location of the build.
 
 For the scan to work we need to supply the following params to the docker container:
@@ -44,10 +21,14 @@ For the scan to work we need to supply the following params to the docker contai
 
 Tool usage example:
 ```bash
-sudo docker run retire  \
---sourceRepo https://github.com/riiecco/dockertools.git \
---projectFolder testable-code \
---sourceToScan testable-code/pythonflask \
---resultSource https://172.17.0.1:8443/threadfix/rest/applications/1/upload?apiKey={AgdLRap39VUEnBUajxZjoeKKunIv7psnBeH33vFfU}
-
+sudo docker run -e REPO=https://github.com/riiecco/juice-shop -e FOLDER=/juice-shop retirejs \ 
+-e ARTIFACTORY_USER=dummyText \    #optional
+-e ARTIFACTORY_EMAIL=dummyText \   #optional
+-e ARTIFACTORY_PWHASH=dummyText \  #optional
+-e JIRA_PROXY_BASEURL=dummyText \  #optional
+-e JIRA_API_TOKEN=dummyText \      #optional
+-e JIRA_USER=dummyText \           #optional
+-e JIRA_PASSWD=dummyText \         #optional
+|| true                   
 ```
+Pipe the command to true otherwise build fuilds because of retire scan
