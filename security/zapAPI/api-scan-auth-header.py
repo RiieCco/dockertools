@@ -34,6 +34,9 @@ time.sleep(2)
 
 zap.httpsessions.create_empty_session(results.target)
 zap.httpsessions.rename_session(results.target, 'Session 0', 'WP Admin')
+zap.httpsessions.set_active_session(results.target, 'WP Admin')
+zap.httpsessions.set_session_token_value(results.target, "token", "token", "token", apikey)
+
 
 rule = zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
 print 'rule was added %s' % rule
