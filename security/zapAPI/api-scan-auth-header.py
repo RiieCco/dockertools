@@ -32,7 +32,7 @@ zap.urlopen(target)
 # Give the sites tree a chance to get updated
 time.sleep(2)
 
-token = zap.replacer.add_rule("set cookies", "true", "REQ_HEADER", "true", "Cookie:", "aaaa="+results.token, "", apikey)
+token = zap.replacer.add_rule("set cookies", "true", "REQ_HEADER", "true", "Cookie", "aaaa="+results.token, "", apikey)
 print 'rule was added %s' % token
 
 rule = zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
