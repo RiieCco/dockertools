@@ -21,7 +21,7 @@ RESULT_FILE="/tmp/$$.$(hostname).results.json"
 #[ -z "${JIRA_PASSWD}" ]  && exit_env_error JIRA_PASSWD
 
 
-token=$(curl -H "Content-Type: application/json" -X POST -d  '{"email": "riccardotencate@gmail.com", "password":"Welkom01!"}' "http://localhost:3000/rest/user/login" | cut -d ':' -f 3 | cut -d '"' -f 2)
+token=$(curl -H "Content-Type: application/json" -X POST -d  '{"email": "riccardotencate@gmail.com", "password":"Welkom01!"}' "http://172.17.0.1:3000/rest/user/login" | cut -d ':' -f 3 | cut -d '"' -f 2)
 
 
 python /api-scan-auth-header.py --zap_key "${ZAP_KEY}" --zap_proxy "${ZAP_PROXY}" --target "${TARGET}" --swagger "${SWAGGER}" --auth_token "${token}"
