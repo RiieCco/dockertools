@@ -32,7 +32,7 @@ zap.urlopen(target)
 # Give the sites tree a chance to get updated
 time.sleep(2)
 
-cookie_hash = hashlib.md5('172.17.0.1:3000').hexdigest()
+cookie_hash = "fak u dolphin"
 zap.httpsessions.add_session_token('172.17.0.1:3000', 'wordpress_' + cookie_hash)
 zap.httpsessions.add_session_token('172.17.0.1:3000', 'wordpress_logged_in_' + cookie_hash)
 
