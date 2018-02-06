@@ -32,14 +32,8 @@ zap.urlopen(target)
 # Give the sites tree a chance to get updated
 time.sleep(2)
 
-cookie_hash = "fak u dolphin"
-zap.httpsessions.add_session_token('172.17.0.1:3000', 'wordpress_' + cookie_hash)
-zap.httpsessions.add_session_token('172.17.0.1:3000', 'wordpress_logged_in_' + cookie_hash)
-
-zap.httpsessions.create_empty_session('172.17.0.1:3000')
-zap.httpsessions.rename_session('172.17.0.1:3000', 'Session 0', 'WP Admin')
-
-zap.httpsessions.set_active_session('172.17.0.1:3000', 'WP Admin')
+rule = zap.replacer.add_rule("set cookies", "true", "REQ_HEADER", "true", "Cookie: token=", results.token, "", apikey)
+print 'rule was added %s' % rule
 
 rule = zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
 print 'rule was added %s' % rule
