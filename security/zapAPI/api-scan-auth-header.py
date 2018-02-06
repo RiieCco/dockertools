@@ -32,10 +32,10 @@ zap.urlopen(target)
 # Give the sites tree a chance to get updated
 time.sleep(2)
 
-zap.httpsessions.create_empty_session(target)
-zap.httpsessions.rename_session(target, 'Session 0', 'WP Admin')
-zap.httpsessions.set_active_session(target, 'WP Admin')
-zap.httpsessions.set_session_token_value(target, "token", "token", "token", apikey)
+zap.httpsessions.create_empty_session("http://172.17.0.1:3000")
+zap.httpsessions.rename_session("http://172.17.0.1:3000", 'Session 0', 'WP Admin')
+zap.httpsessions.set_active_session("http://172.17.0.1:3000", 'WP Admin')
+zap.httpsessions.set_session_token_value("http://172.17.0.1:3000", "token", "token", "token", apikey)
 
 
 rule = zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
