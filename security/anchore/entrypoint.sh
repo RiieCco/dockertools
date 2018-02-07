@@ -30,7 +30,7 @@ while IFS=',' read -ra IMAGE; do
  done <<< "${IMAGES}"
  
 #give the scanner some time to analyze al the images
-#sleep(240)
+sleep(240)
 
 while IFS=',' read -ra IMAGE; do
       for i in "${IMAGE[@]}"; do
