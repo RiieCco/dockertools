@@ -32,7 +32,7 @@ zap.urlopen(target)
 # Give the sites tree a chance to get updated
 time.sleep(2)
 
-zap.ajaxspider.scan(results.target, "", "", "", apikey)
+zap.ajaxSpider.scan(results.target, "", "", "", apikey)
 
 zap.replacer.add_rule("set cookies", "true", "RESP_HEADER", "true", "Cookie", "token="+results.token, "true", apikey)
 zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "true", apikey)
