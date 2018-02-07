@@ -32,13 +32,12 @@ zap.urlopen(target)
 # Give the sites tree a chance to get updated
 time.sleep(2)
 
-token = zap.replacer.add_rule("set cookies", "true", "REQ_HEADER", "true", "Cookie", "token="+results.token, "", apikey)
-print 'rule was added %s' % token
+#token = zap.replacer.add_rule("set cookies", "true", "REQ_HEADER", "true", "Cookie", "token="+results.token, "", apikey)
+#print 'rule was added %s' % token
 
-rule = zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
-print 'rule was added %s' % rule
+#rule = zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "", apikey)
+#print 'rule was added %s' % rule
 
- 
 override = target.split('://')
 
 swagger = zap.openapi.import_url(results.swagger, hostoverride=override[1], apikey=apikey)
