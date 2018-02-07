@@ -66,3 +66,4 @@ file.close()
 
 zap.replacer.remove_rule("Authorization header", apikey)
 zap.replacer.remove_rule("set cookies", apikey)
+zap.core.new_session("","",apikey)
