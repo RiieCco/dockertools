@@ -1,15 +1,7 @@
+echo "Provisioning runtime next to the JDK"
+echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
 
-# Dockertools
-
-Contains multiple tools for integrating into a SDLC for security
-
-1. [OWASP ZAP](https://github.com/RiieCco/dockertools/tree/master/security/zapAPI "OWASP ZAP")
-2. [OWASP Dependency check](https://github.com/RiieCco/dockertools/tree/master/security/dependency-check "Dep-check")
-3. [Anchore](https://github.com/RiieCco/dockertools/tree/master/security/anchore "Anchore")
-4. [RetireJS](https://github.com/RiieCco/dockertools/tree/master/security/retireJS "RetireJS")
-
-## Note
-
-All these tools are clients that communicate to the engines, the links on where to download
-and configure these engines is described per tooling in the README.MD. :)
-
+sudo add-apt-repository ppa:webupd8team/java -y
+sudo apt-get update -y
+sudo apt-get install oracle-java8-installer -y
+sudo apt-get install ant -y
