@@ -7,12 +7,10 @@ exit_env_error() {
     exit 1
 }
 
-RESULT_FILE="/tmp/$$.$(hostname).results.json"
-
 [ -z "${ZAP_KEY}" ] && exit_env_error ZAP_KEY
 [ -z "${ZAP_PROXY}" ] && exit_env_error ZAP_PROXY
 [ -z "${TARGET}" ] && exit_env_error TARGET
-[ -z "${SWAGGER}" ] && exit_env_error SWAGGER
+[ -z "${ENDPOINTS}" ] && exit_env_error ENDPOINTS
 [ -z "${AUTH_TOKEN}" ] && exit_env_error AUTH_TOKEN
 
 #[ -z "${JIRA_PROXY_BASEURL}" ] && exit_env_error JIRA_PROXY_BASEURL # http://172.17.0.1:1337/api
@@ -21,10 +19,10 @@ RESULT_FILE="/tmp/$$.$(hostname).results.json"
 #[ -z "${JIRA_PASSWD}" ]  && exit_env_error JIRA_PASSWD
 
 
-token=$(curl -H "Content-Type: application/json" -X POST -d  '{"email": "riccardotencate@gmail.com", "password":"Welkom01!"}' "http://172.17.0.1:3000/rest/user/login" | cut -d ':' -f 3 | cut -d '"' -f 2)
-
-
-python /api-scan-auth-header.py --zap_key "${ZAP_KEY}" --zap_proxy "${ZAP_PROXY}" --target "${TARGET}" --swagger "${SWAGGER}" --auth_token "${token}"
+#token=$(curl -H "Content-Type: application/json" -X POST -d  '{"email": "riccardotencate@gmail.com", "password":"Welkom01!"}' "http://172.17.0.1:3000/rest/user/login" | cut -d ':' -f 3 | cut -d '"' -f 2)
+token="none"
+wget ${ENDPOINTS} -O endpoints.txt
+python /api-scan-auth-header.py --zap_key "${ZAP_KEY}" --zap_proxy "${ZAP_PROXY}" --target "${TARGET}" --endpoints /endpoints.txt --auth_token "${token}"
 cat zap-report.xml
 
 # post to Jira

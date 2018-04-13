@@ -19,6 +19,12 @@ sudo docker pull owasp/zap2docker-stable
 sudo docker run -u zap -p 8081:8081 -i owasp/zap2docker-stable zap.sh -daemon -host 0.0.0.0 -port 8081 -config api.key=testing -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
 ```
 
+#Run the ZAP headless and allocate more memory 
+# Xmx is the max amount you want to allocate (in MB) and the Xms is the initial amount.
+```bash
+sudo docker run -u zap -p 8081:8081 -i owasp/zap2docker-stable java -Xmx1024M -Xms1024M -jar zap-2.7.0.jar -daemon -host 0.0.0.0 -port 8081 -config api.key=testing -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
+```
+
 #Build the ZAP API docker:
 ```bash
 sudo docker build -t zapapi security/zapAPI
@@ -26,9 +32,5 @@ sudo docker build -t zapapi security/zapAPI
 
 #Run the ZAP API docker:
 ```bash
-sudo docker run -e ZAP_KEY=testing \ #The api key you started ZAP headless with
--e ZAP_PROXY=172.17.0.1:8081 \ #check ifconfig for docker adress
--e TARGET=http://172.17.0.1:3000 \
--e SWAGGER=nonethistime \ #Location of swagger file to provision scan
--e AUTH_TOKEN=nonethistime zapapi" #Authtoken for JiraAPI, not used in training
+docker run -e ZAP_KEY=testing -e ZAP_PROXY=192.168.2.23:8081 -e TARGET=http://192.168.2.23:8000 -e ENDPOINTS=https://raw.githubusercontent.com/RiieCco/jenkinsfile/master/endpoints.txt -e AUTH_TOKEN=nonethistime zapapi
 ```

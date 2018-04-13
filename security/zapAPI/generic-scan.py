@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--zap_key',  action='store', dest='zapkey', help='Provide the ZAP api key - [trrpvf26kvicie9jq83ig8hghd]')
 parser.add_argument('--zap_proxy', action='store', dest='proxy', help='Provide ZAP proxy ip / port - [http://127.0.0.1:8082]')
 parser.add_argument('--target',  action='store', dest='target', help='Provide the target to scan - [http://example.com]')
-parser.add_argument('--swagger', action='store', dest='swagger', help='Provide swagger file - [http://example.com/api/swagger.json]' )
+parser.add_argument('--endpoints', action='store', dest='endpoints', help='Provide endpoints file - [http://example.com/api/endpoints.txt]' )
 parser.add_argument('--auth_token', action='store', dest='token', help='Authorization token' )
 
 results = parser.parse_args()
@@ -28,18 +28,19 @@ zap = ZAPv2(apikey=apikey, proxies={'http': results.proxy, 'https': results.prox
 print 'Accessing target %s' % target
 # try have a unique enough session...
 
-zap.urlopen(target)
-# Give the sites tree a chance to get updated
-time.sleep(2)
+with open(results.endpoints, 'r') as f:
+    for line in f:
+        zap.urlopen(line)
 
-zap.replacer.add_rule("set cookies", "true", "RESP_HEADER", "true", "Cookie", "token="+results.token, "true", apikey)
-zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "true", apikey)
+# Give the sites tree a chance to get updated
+
+time.sleep(5)
+
+#for adding the auth headers or setting session cookies on all the request response
+#zap.replacer.add_rule("set cookies", "true", "RESP_HEADER", "true", "Cookie", "token="+results.token, "true", apikey)
+#zap.replacer.add_rule("Authorization header", "true", "REQ_HEADER", "true", "Authorization", results.token, "true", apikey)
 
 override = target.split('://')
-
-swagger = zap.openapi.import_url(results.swagger, hostoverride=override[1], apikey=apikey)
-print 'swagger file was imported %s' % swagger
-
 
 scanid = zap.ascan.scan(target)
 while (int(zap.ascan.status(scanid)) < 100):
@@ -60,5 +61,5 @@ file = open('zap-report.xml', 'w')
 file.write(report)
 file.close()
 
-zap.replacer.remove_rule("Authorization header", apikey)
-zap.replacer.remove_rule("set cookies", apikey)
+#zap.replacer.remove_rule("Authorization header", apikey)
+#zap.replacer.remove_rule("set cookies", apikey)
