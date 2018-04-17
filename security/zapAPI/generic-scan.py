@@ -61,5 +61,7 @@ file = open('zap-report.xml', 'w')
 file.write(report)
 file.close()
 
+zap.ascan.remove_scan(scanid,apikey)
+
 #zap.replacer.remove_rule("Authorization header", apikey)
 #zap.replacer.remove_rule("set cookies", apikey)
