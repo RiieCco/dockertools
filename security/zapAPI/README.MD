@@ -2,35 +2,40 @@
 
 The OWASP Zed Attack Proxy (ZAP) is one of the world’s most popular free security tools and is actively maintained by hundreds of international volunteers*. It can help you automatically find security vulnerabilities in your web applications while you are developing and testing your applications. Its also a great tool for experienced pentesters to use for manual security testing.
 
-### This folder contains the owasp ZAP client that communicates to the ZAP instance.
+### Dynamic ZAP instances with narrow scoping for short feedback in CI/CD pipelines
 
-The OWASP ZAP instance can be downloaded from here: [OWASP ZAP](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project)
-After installation owasp ZAP can be run headless in the commandline like:
-[OWASP Headless instructions](https://github.com/zaproxy/zap-core-help/wiki/HelpCmdline)
+This docker folder contains the docker folder of the official zap stable release
+however the zap-baseline.py was edited for my own scans. This helps to run more scans
+for more developers at the same time with their own zap instance so the devs get
+effective feedback of only their commits.
 
+#for running scans against monolythical apps and scope them
 
-#Pull the ZAP headless docker
-```bash
-sudo docker pull owasp/zap2docker-stable
+#Step 1
+```
+go to the docker folder, do a build like
+docker build -t zapscan .
 ```
 
-#Run the ZAP headless docker 
-```bash
-sudo docker run -u zap -p 8081:8081 -i owasp/zap2docker-stable zap.sh -daemon -host 0.0.0.0 -port 8081 -config api.key=testing -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
+#Step2
+```
+After building the container push it to an docker hub and you can run it from CI pipeline
 ```
 
-#Run the ZAP headless and allocate more memory 
-# Xmx is the max amount you want to allocate (in MB) and the Xms is the initial amount.
-```bash
-sudo docker run -u zap -p 8081:8081 -i owasp/zap2docker-stable java -Xmx1024M -Xms1024M -jar zap-2.7.0.jar -daemon -host 0.0.0.0 -port 8081 -config api.key=testing -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -addoninstallall
+#Step3 how to run the scan
+```
+docker run zapscan zap-baseline.py --target http://192.168.2.23 --endpoints https://raw.githubusercontent.com/RiieCco/jenkinsfile/master/endpoints.txt
 ```
 
-#Build the ZAP API docker:
-```bash
-sudo docker build -t zapapi security/zapAPI
-```
+the --endpoints gets a text file from a repository that is used to let the spider iterate over. The
+spider is set to "spider subtree only" so it just collects GET and POST options from the imported 
+URLS so the scan can be scoped very carfully for a short feedback loop.
 
-#Run the ZAP API docker:
-```bash
-docker run -e ZAP_KEY=testing -e ZAP_PROXY=192.168.2.23:8081 -e TARGET=http://192.168.2.23:8000 -e ENDPOINTS=https://raw.githubusercontent.com/RiieCco/jenkinsfile/master/endpoints.txt -e AUTH_TOKEN=nonethistime zapapi
+There wil also be other optional params like --header --cookie if these are set it wil
+take care of setting the headers or cookies requred for authentication, you could set
+the CI up that it first curls the app and gives the token/cookie back to the build of
+the ZAP tool to authenticate.
+
+```
+sh 'TOKEN="$(curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" -d \'{ "username": "admin", "password": "test-skf" }\' "http://demo.securityknowledgeframework.org:8888/api/user/login" | cut -d \'"\' -f 4)"'
 ```
