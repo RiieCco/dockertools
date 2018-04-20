@@ -1,4 +1,4 @@
-# This dockerfile builds the zap stable release
+# This dockerfile builds the zap weekly release
 FROM ubuntu:16.04
 LABEL maintainer="psiinon@gmail.com"
 
@@ -39,8 +39,9 @@ USER zap
 
 RUN mkdir /home/zap/.vnc
 
-# Download and expand the latest stable release 
-RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml | xmlstarlet sel -t -v //url |grep -i Linux | wget -nv --content-disposition -i - -O - | tar zxv && \
+RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml | xmlstarlet sel -t -v //url |grep -i weekly | wget --content-disposition -i - && \
+	unzip *.zip && \
+	rm *.zip && \
 	cp -R ZAP*/* . &&  \
 	rm -R ZAP* && \
 	# Setup Webswing
@@ -63,9 +64,8 @@ ENV ZAP_PORT 8080
 ENV HOME /home/zap/
 
 COPY zap* /zap/
-COPY zap-generic-scan.py /zap/
 COPY webswing.config /zap/webswing/
-COPY policies /home/zap/.ZAP/policies/
+COPY policies /home/zap/.ZAP_D/policies/
 COPY .xinitrc /home/zap/
 
 #Copy doesn't respect USER directives so we need to chown and to do that we need to be root
@@ -73,14 +73,17 @@ USER root
 
 RUN chown zap:zap /zap/zap-x.sh && \
 	chown zap:zap /zap/zap-baseline.py && \
-        chown zap:zap /zap/zap-generic-scan.py && \
 	chown zap:zap /zap/zap-webswing.sh && \
 	chown zap:zap /zap/webswing/webswing.config && \
-	chown zap:zap -R /home/zap/.ZAP/ && \
+	chown zap:zap -R /home/zap/.ZAP_D/ && \
 	chown zap:zap /home/zap/.xinitrc && \
 	chmod a+x /home/zap/.xinitrc
+
+#make custom scripts executable, could not find location where it was done
+RUN chmod 777 zap-scoped-scan.py
 
 #Change back to zap at the end
 USER zap
 
 HEALTHCHECK --retries=5 --interval=5s CMD zap-cli status
+
