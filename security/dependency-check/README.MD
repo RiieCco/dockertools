@@ -8,12 +8,10 @@ The OWASP Dependency check can be downloaded from here: [OWASP Dependenct check]
 
 #### Usage
 
+Build the container and run it from CI pipe-line! :-)
 For the scan to work we need to supply the following params to the docker container
 
 1. The code source we want to scan for dependencies
-2. Specify the project folder of the application
-3. Specify the source to scan (src, root, app) folder
-4. Where to push the metrics/report to.
 
 Tool usage example:
 ```bash
