@@ -1,19 +1,25 @@
-# OWASP Dependency check
+# Mobile security framework (static only)
 
-Dependency-Check is a utility that identifies project dependencies and checks if there are any known, publicly disclosed, vulnerabilities. Currently Java and .NET are supported; additional experimental support has been added for Ruby, Node.js, Python, and limited support for C/C++ build systems
+Mobile Security Framework (MobSF) is an automated, all-in-one mobile application (Android/iOS/Windows) pen-testing framework capable of performing static, dynamic and malware analysis. It can be used for effective and fast security analysis of Android, iOS and Windows mobile applications and support both binaries (APK, IPA & APPX ) and zipped source code.
 
-### This folder contains the owasp ZAP client that communicates to the ZAP instance.
+### This is how to set up the mobsf engine on the tools server
 
-The OWASP Dependency check can be downloaded from here: [OWASP Dependenct check](https://www.owasp.org/index.php/OWASP_Dependency_Check)
+```
+   docker pull opensecurity/mobile-security-framework-mobsf
+   docker run -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf:latest
+```
 
 #### Usage
 
 Build the container and run it from CI pipe-line! :-)
 For the scan to work we need to supply the following params to the docker container
 
-1. The code source we want to scan for dependencies
+1. The location where to pull the apk file
+2. The ip adress of the engine -> http://localhost:8000
+3. The API key provided by the engine on start-up
 
 Tool usage example:
 ```bash
-sudo docker run -e SOURCCE_REPO=<repo> dep-check
+sudo docker build -t mobsf-client .
+sudo docker run -e SOURCCE_REPO=<repo> -e ENGINE_IP=<ip> -e API_KEY=api-key mobsf-client
 ```
