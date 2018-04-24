@@ -17,9 +17,5 @@ For the scan to work we need to supply the following params to the docker contai
 
 Tool usage example:
 ```bash
-sudo docker run dep  \
---sourceRepo ${value["repository"]} \
---projectFolder ${value["projectFolder"]} \
---sourceToScan ${value["sourceToScan"]} \
---resultSource ${value["resultSource"]}
+sudo docker run -e SOURCCE_REPO=<repo> dep-check
 ```
