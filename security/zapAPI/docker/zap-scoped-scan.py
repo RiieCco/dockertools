@@ -126,18 +126,17 @@ def main(argv):
     try:
         zap = ZAPv2(proxies={'http': 'http://' + zap_ip + ':' + str(port), 'https': 'http://' + zap_ip + ':' + str(port)})
 
-        
-
-        wait_for_zap_start(zap, timeout * 20000)
+        wait_for_zap_start(zap, timeout * 40000)
         print(target)
         print(endpoints)
 
+        #command injection problem i recon
         command = "wget "+endpoints
         os.system(command)
 
-        with open("endpoints.txt", 'r') as f:
-            for line in f:
-                zap.urlopen(line)
+        time.sleep(5)
+
+        zap.urlopen(target)
         
         # Give the sites tree a chance to get updated
         time.sleep(5)
