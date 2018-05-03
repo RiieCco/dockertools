@@ -21,6 +21,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('-t',  action='store', dest='target', help='Provide the target to scan - [http://example.com]')
 parser.add_argument('-e', action='store', dest='endpoints', help='Provide endpoints file - [http://example.com/api/endpoints.txt]' )
+parser.add_argument('-z', action='store', dest='zap_options', help='ZAP command line options e.g. -z "-config aaa=bbb -config ccc=ddd"' )
 
 results = parser.parse_args()
 
@@ -55,7 +56,7 @@ def main(argv):
     zap_alpha = False
     info_unspecified = False
     zap_ip = 'localhost'
-    zap_options = ''
+    zap_options = results.zap_options
     delay = 0
     timeout = 0
     target = results.target
@@ -109,6 +110,7 @@ def main(argv):
 
         if (zap_alpha):
             params.extend(['-addoninstall', 'ascanrules'])
+            params.extend(['-addoninstall', 'replacer'])
 
         add_zap_options(params, zap_options)
 
@@ -179,3 +181,5 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv[1:])
+
+
