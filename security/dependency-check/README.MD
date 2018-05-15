@@ -15,5 +15,5 @@ For the scan to work we need to supply the following params to the docker contai
 
 Tool usage example:
 ```bash
-sudo docker run -e SOURCCE_REPO=<repo> dep-check
+sudo docker run -e SOURCCE_REPO=<repo>  DOJO_URL=http://192.168.2.23 -e DOJO_API_KEY=admin:746d89602a29e1897d6342faf00f63d28334fb9e -e DOJO_ENGAGEMENT_ID=1 dep-check
 ```

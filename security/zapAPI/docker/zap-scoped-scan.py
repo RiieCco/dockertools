@@ -22,6 +22,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-t',  action='store', dest='target', help='Provide the target to scan - [http://example.com]')
 parser.add_argument('-e', action='store', dest='endpoints', help='Provide endpoints file - [http://example.com/api/endpoints.txt]' )
 parser.add_argument('-z', action='store', dest='zap_options', help='ZAP command line options e.g. -z "-config aaa=bbb -config ccc=ddd"' )
+parser.add_argument('-u', action='store', dest='dojo_url', help='The ip:port of the defect dojo location i.e 192.168.2.23:8000' )
+parser.add_argument('-a', action='store', dest='dojo_api_key', help='Defect dojo API key: admin:746d89602a29e1897d6342faf00f63d28334fb9e' )
+parser.add_argument('-i', action='store', dest='dojo_engagement_id', help='Engagement id of where to commit the scan results to i.e: 3' )
+
 
 results = parser.parse_args()
 
@@ -61,6 +65,9 @@ def main(argv):
     timeout = 0
     target = results.target
     endpoints = results.endpoints
+    dojo_url = results.dojo_url
+    dojo_api_key = results.dojo_api_key
+    dojo_engagement_id = results.dojo_engagement_id
     check_zap_client_version()
 
     if running_in_docker():
@@ -156,8 +163,14 @@ def main(argv):
             print 'Scan progress %: ' + zap.ascan.status(scanid)
             time.sleep(1)
 
-        report = zap.core.xmlreport()
-        print(report)
+        write_report('result.xml', zap.core.xmlreport())
+        
+        time.sleep(10)
+
+        #command injection problem i recon
+        commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date=2018-05-01 --form verified=False --form file=@result.xml --form tags=Test_automation --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id)
+        os.system(commit_to_dojo)
+        
         zap.core.shutdown()
 
     except IOError as e:

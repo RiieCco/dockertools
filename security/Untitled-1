@@ -1,0 +1,46 @@
+About this session:
+
+During our work as penetration testers we found that there where a lot of vulnerabilities
+that could have been easilly prevented whenever the developers where given proper
+guidance and security requirements. 
+
+In the current state of software development with the whole (S)SDLC in place, the 
+security tooling integrated in your security pipe-lines will not cover the 
+whole attack surface. This is because the tooling can never understand the full
+context of the applications functions and logic, but the developers can!
+
+To
+
+About the trainers:
+
+Glenn ten Cate:
+As a coder, hacker, speaker, trainer and security researcher employed at ING Belgium Glenn has over 10 years experience
+in the field of security. One of the founders of defensive development [defdev] a security training and conference 
+series dedicated to helping you build and maintain secure software and also speaking at multiple other security conferences 
+in the world. His goals is to create an open-source software development life cycle with the tools and knowledge gathered over the years.
+
+Riccardo ten Cate:
+As a penetration tester from the Netherlands Riccardo specializes in application security and has extensive knowledge in 
+securing applications in multiple coding languages. Riccardo has many years of experience in training and guiding 
+development teams.
+
+Riccardo also has expertise on implementing security test automation in CI/CD pipelines. 
+This helps create short feedback loops back to the developer and prevents bugs from getting into
+production into an early phase of the development lifecycle. By combining these skillsets into the SKF
+Riccardo helps development teams becoming more mature and making their applications secure by design.
+
+
+
+Sofware development heeft laatste jaren veel nieuwe ontwikkelingen gezien.
+Denk hierbij aan het opzetten security test automation in (CI/CD) pipe-lines. 
+
+Echter, de security tooling in de pipe-lines kent niet de volledige context van de applicaties functies
+en business logica en kan hierdoor niet in het volledige aanvals oppervlak scannen naar kwetsbaarheden.
+Ook zal het geen complexe aanvallen detecteren.
+
+Door de developers handvaten te geven om mee aan de slag te gaan in de vorm van security requirements, kennis en awareness 
+maken wij van hun de meest waardevolle asset in het (S)SDLC en maken we applicaties "Secure by design". 
+
+Hoe?
+
+Hiervoor willen we graag meer vertellen over het OWASP Security knowledge framework!

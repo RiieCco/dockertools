@@ -22,20 +22,71 @@ docker build -t zapscan .
 After building the container push it to an docker hub and you can run it from CI pipeline
 ```
 
-#Step3 how to run the scan
+#How to run the scan normally
 ```
-docker run zapscan zap-baseline.py --target http://192.168.2.23 --endpoints https://raw.githubusercontent.com/RiieCco/jenkinsfile/master/endpoints.txt
+docker run -v $(pwd):/zap/wrk/:rw zapscan zap-scoped-scan.py -t http://192.168.2.23 -e https://raw.githubusercontent.com/RiieCco/jenkinsfile/master/endpoints.txt 
 ```
 
-the --endpoints gets a text file from a repository that is used to let the spider iterate over. The
-spider is set to "spider subtree only" so it just collects GET and POST options from the imported 
-URLS so the scan can be scoped very carfully for a short feedback loop.
+#How to run the scan with auth headers for JWT i.e.
+```
+docker run -v $(pwd):/zap/wrk/:rw zapscan zap-scoped-scan.py -t http://192.168.2.23 -e https://raw.githubusercontent.com/RiieCco/jenkinsfile/master/endpoints.txt -z "-config replacer.full_list=asdasda -config replacer.description=sadas -config replacer.enabled=true -config replacer.matchtype=REQ_HEADER -config replacer.replacement=foobar"
+```
 
-There wil also be other optional params like --header --cookie if these are set it wil
-take care of setting the headers or cookies requred for authentication, you could set
-the CI up that it first curls the app and gives the token/cookie back to the build of
-the ZAP tool to authenticate.
+-t   (for target)
+-e   (defines the endpoints to be scanned)
+-z   (Custom config options such as adding auth headers)
 
+#How to run the scan full for nightly builds
+```
+docker run -v $(pwd):/zap/wrk/:rw zapscan zap-full-scan.py -t http://192.168.2.23 
+```
+
+#How to run the scan full for API scans, can feed swagger to scope
+```
+Usage: docker run zapscan zap-api-scan.py -t <target> -f <format> [options]
+
+    -t target         target API definition, currently only an OpenAPI URL, eg https://www.example.com/openapi.json
+    -f format         either openapi or soap
+Options:
+    -c config_file    config file to use to INFO, IGNORE or FAIL warnings
+    -u config_url     URL of config file to use to INFO, IGNORE or FAIL warnings
+    -g gen_file       generate default config file (all rules set to WARN)
+    -r report_html    file to write the full ZAP HTML report
+    -w report_md      file to write the full ZAP Wiki (Markdown) report
+    -x report_xml     file to write the full ZAP XML report
+    -a                include the alpha passive scan rules as well
+    -d                show debug messages
+    -P                specify listen port
+    -D                delay in seconds to wait for passive scanning 
+    -i                default rules not in the config file to INFO
+    -l level          minimum level to show: PASS, IGNORE, INFO, WARN or FAIL, use with -s to hide example URLs
+    -n context_file   context file which will be loaded prior to scanning the target
+    -p progress_file  progress file which specifies issues that are being addressed
+    -s                short output format - dont show PASSes or example URLs
+    -z zap_options    ZAP command line options e.g. -z "-config aaa=bbb -config ccc=ddd"
+```
+
+
+#how to curl to get auth token in jenkins file
 ```
 sh 'TOKEN="$(curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" -d \'{ "username": "admin", "password": "test-skf" }\' "http://demo.securityknowledgeframework.org:8888/api/user/login" | cut -d \'"\' -f 4)"'
+```
+
+
+#some stuff for defect dojo curls + additions for the setup.bash from the "django-DefectDojo" git 
+
+```
+curl --request POST --url http://localhost:8000/api/v1/importscan/ --header 'authorization: ApiKey admin:23f51b27bda98cb538bfa56627a4ab768792a636' --header 'cache-control: no-cache' --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' --form minimum_severity=Info --form scan_date=2018-05-01 --form verified=False --form file=@/var/jenkins_home/workspace/pipe-line/results.xml --form tags=TEST --form active=True --form engagement=/api/v1/engagements/1/ --form 'scan_type=ZAP Scan'
+```
+
+
+You need to add those 3 lines and than build your own container!
+
+```
+
+sed -i "s/TEMPLATE_DEBUG = DEBUG/TEMPLATE_DEBUG = False/g" dojo/settings/settings.py
+sed -i "s/ALLOWED_HOSTS = \[]/ALLOWED_HOSTS = ['192.168.2.23']/g" dojo/settings/settings.py
+cat dojo/settings/settings.py
+
+
 ```
