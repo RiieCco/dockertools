@@ -1,46 +1,26 @@
 About this session:
 
-During our work as penetration testers we found that there where a lot of vulnerabilities
-that could have been easilly prevented whenever the developers where given proper
-guidance and security requirements. 
+During our work as penetration testers we found that there are a lot of vulnerabilities
+being introduced in applications that could have been prevented in an early stage of development.
 
-In the current state of software development with the whole (S)SDLC in place, the 
-security tooling integrated in your security pipe-lines will not cover the 
-whole attack surface. This is because the tooling can never understand the full
-context of the applications functions and logic, but the developers can!
+We can see the latest trend in integrating security tooling into CI/CD pipelines. However, security tooling 
+integrated in your security pipe-lines will not cover the whole attack surface. This is because the 
+tooling can never understand the full context of the applications functions and logic. 
 
-To
+On the other hand, resources in the form of manual verification can often be scarce and expensive. 
 
-About the trainers:
+Where do we find the right balance between security test automation, manual verification?
 
-Glenn ten Cate:
-As a coder, hacker, speaker, trainer and security researcher employed at ING Belgium Glenn has over 10 years experience
-in the field of security. One of the founders of defensive development [defdev] a security training and conference 
-series dedicated to helping you build and maintain secure software and also speaking at multiple other security conferences 
-in the world. His goals is to create an open-source software development life cycle with the tools and knowledge gathered over the years.
+Even more importantly, how do we train the developers understand the metrics and make security part
+of their process?
 
-Riccardo ten Cate:
-As a penetration tester from the Netherlands Riccardo specializes in application security and has extensive knowledge in 
-securing applications in multiple coding languages. Riccardo has many years of experience in training and guiding 
-development teams.
+This could been achieved by setting up an (S)SDLC, but what does a good (S)SDLC consists of?
 
-Riccardo also has expertise on implementing security test automation in CI/CD pipelines. 
-This helps create short feedback loops back to the developer and prevents bugs from getting into
-production into an early phase of the development lifecycle. By combining these skillsets into the SKF
-Riccardo helps development teams becoming more mature and making their applications secure by design.
+This talk will guide everybody willing to take the maturity of their security to a higher level.
+
+We do so by defining a complete (S)SDLC which will cover all different facets in the threat landscape and
+correlating vulnerabilities making applications secure, by design. 
 
 
 
-Sofware development heeft laatste jaren veel nieuwe ontwikkelingen gezien.
-Denk hierbij aan het opzetten security test automation in (CI/CD) pipe-lines. 
 
-Echter, de security tooling in de pipe-lines kent niet de volledige context van de applicaties functies
-en business logica en kan hierdoor niet in het volledige aanvals oppervlak scannen naar kwetsbaarheden.
-Ook zal het geen complexe aanvallen detecteren.
-
-Door de developers handvaten te geven om mee aan de slag te gaan in de vorm van security requirements, kennis en awareness 
-maken wij van hun de meest waardevolle asset in het (S)SDLC en maken we applicaties "Secure by design". 
-
-Hoe?
-
-Hiervoor willen we graag meer vertellen over het OWASP Security knowledge framework!

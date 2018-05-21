@@ -24,7 +24,7 @@ After building the container push it to an docker hub and you can run it from CI
 
 #How to run the scan normally
 ```
-docker run -v $(pwd):/zap/wrk/:rw zapscan zap-scoped-scan.py -t http://192.168.2.23 -e https://raw.githubusercontent.com/RiieCco/jenkinsfile/master/endpoints.txt 
+sudo docker run zapscan zap-scoped-scan.py -t http://192.168.2.23:8000 -e https://raw.githubusercontent.com/RiieCco/jenkinsfile/master/endpoints.txt -a admin:cf7fab01ec45e459623b987884b653853f11bea8 -u http://192.168.2.23:8000 -i 1
 ```
 
 #How to run the scan with auth headers for JWT i.e.
