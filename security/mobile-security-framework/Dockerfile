@@ -10,6 +10,6 @@ COPY entrypoint.sh /
 
 RUN ["chmod", "+x", "/entrypoint.sh"]
 RUN ls -lart
-RUN pwd
+
 ENTRYPOINT ["/entrypoint.sh"]
 

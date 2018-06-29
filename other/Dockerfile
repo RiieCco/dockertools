@@ -1,35 +1,21 @@
-FROM sonarqube:5.6
-MAINTAINER Marco Pas "marco.pas@gmx.net"
+FROM jenkins:latest
 
-# create plugin download location; so we can copy them later when SonarQube is started
-ENV PLUGIN_DOWNLOAD_LOCATION /opt/plugins-download
-RUN mkdir -p $PLUGIN_DOWNLOAD_LOCATION
-WORKDIR ${PLUGIN_DOWNLOAD_LOCATION}
+USER root
+RUN apt-get update \
+      && apt-get install -y sudo \
+      && rm -rf /var/lib/apt/lists/*
+RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
-# download plugins from:
-# - http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins/
-# - https://sonarsource.bintray.com/Distribution/
-# - https://github.com/SonarQubeCommunity/
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-java-plugin/sonar-java-plugin-4.0.jar
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-2.8.jar
-RUN wget https://github.com/SonarQubeCommunity/sonar-findbugs/releases/download/3.4/sonar-findbugs-plugin-3.4.3.jar
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-scm-git-plugin/sonar-scm-git-plugin-1.2.jar
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-widget-lab-plugin/sonar-widget-lab-plugin-1.8.1.jar
-RUN wget https://github.com/SonarQubeCommunity/sonar-pmd/releases/download/2.6/sonar-pmd-plugin-2.6.jar
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-generic-coverage/sonar-generic-coverage-plugin-1.2.jar
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-groovy-plugin/sonar-groovy-plugin-1.3.1.jar
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-web-plugin/sonar-web-plugin-2.4.jar
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-xml-plugin/sonar-xml-plugin-1.4.1.jar
-RUN wget https://sonarsource.bintray.com/Distribution/sonar-python-plugin/sonar-python-plugin-1.8.0.1496.jar
-RUN wget https://github.com/pdsoftplan/sonar-zap/releases/download/1.0.0-0/sonar-zap-plugin-1.0.0-0.jar
-RUN wget https://github.com/stevespringett/dependency-check-sonar-plugin/releases/download/sonar-dependency-check-1.0.3/sonar-dependency-check-plugin-1.0.3.jar
+RUN apt-get update && apt-get install -y libltdl7 && rm -rf /var/lib/apt/lists/*
 
+# Install tools we depend on
+# dnsutils is needed for dig, which we use to let a Jenkins instance determine if it's wired
+# gettext is needed for envsubst, which we use for templating the service files for deployments
+RUN apt-get update && apt-get install -y dnsutils gettext && apt-get clean
+RUN curl -o /usr/local/bin/docker-compose -L \
+        "https://github.com/docker/compose/releases/download/1.8.0/docker-compose-Linux-x86_64" \
+    && chmod +x /usr/local/bin/docker-compose
 
-RUN wget http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins/sonar-timeline-plugin/1.5/sonar-timeline-plugin-1.5.jar
-RUN wget https://github.com/SonarQubeCommunity/sonar-sonargraph/releases/download/sonar-sonargraph-plugin-3.5/sonar-sonargraph-plugin-3.5.jar
+USER jenkins
 
-COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
-RUN chmod +x /opt/docker-entrypoint.sh
-
-WORKDIR ${SONARQUBE_HOME}
-ENTRYPOINT ["/opt/docker-entrypoint.sh"]
+#sudo docker run -v /home/security/Desktop/dockerMount:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -p 8080:8080 jenkins

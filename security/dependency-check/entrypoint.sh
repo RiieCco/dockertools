@@ -12,13 +12,13 @@ OUTPUT_FOLDER="${OUTPUT_FOLDER:-/project}"
 OUTPUT_FORMAT="${OUTPUT_FORMAT:-XML}"
 
 
-#[ -z "${SOURCE_REPO}" ] && exit_env_error SOURCE_REPO
+[ -z "${SOURCE_REPO}" ] && exit_env_error SOURCE_REPO
 [ -z "${DOJO_URL}" ] && exit_env_error DOJO_URL
 [ -z "${DOJO_ENGAGEMENT_ID}" ] && exit_env_error DOJO_ENGAGEMENT_ID
 [ -z "${DOJO_API_KEY}" ] && exit_env_error DOJO_API_KEY
 
-#rm -rf "${PROJECT_FOLDER}" "${OUTPUT_FOLDER}"
-#git clone "${SOURCE_REPO}" "${PROJECT_FOLDER}"
+rm -rf "${PROJECT_FOLDER}" "${OUTPUT_FOLDER}"
+git clone "${SOURCE_REPO}" "${PROJECT_FOLDER}"
 
 mkdir -p "${OUTPUT_FOLDER}"
 

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: zap1
+  labels:
+    app: web
+spec:
+  containers:
+    - name: zap2
+      image: owasp/zap2docker-weekly
+      args: 
+      - zap-baseline.py
+      - -t
+      - https://demo.securityknowledgeframework.org
+      - -U
+      - <dojo-url>
+      - -A <dojo-api-key>
+      - -I <engagement-id>
+  restartPolicy: Never

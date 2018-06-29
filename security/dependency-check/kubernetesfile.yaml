@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dep
+  labels:
+    app: web
+spec:
+  containers:
+    - name: dep
+      image: defdev/dependency-check-lite
+      env: 
+      - name: SOURCE_REPO
+        value: https://github.com/RiieCco/training-repository
+  restartPolicy: Never

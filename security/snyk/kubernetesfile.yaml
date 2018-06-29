@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: snyk
+  labels:
+    app: web
+spec:
+  containers:
+    - name: snyk
+      image: rtencatexebia/snyk-scan-test
+      env: 
+      - name: SOURCE_REPO
+        value: https://github.com/blabla1337/skf-flask
+      - name: DOJO_URL
+        value: https://dojo-url
+      - name: DOJO_ENGAGEMENT_ID
+        value: 1
+      - name: DOJO_API_KEY
+        value: <APIKEY>
+      - name: SNYK_API_KEY
+        value: <APIKEY>
+      - name: SOURCE_TO_SCAN
+        value: Angular
+  restartPolicy: Never
