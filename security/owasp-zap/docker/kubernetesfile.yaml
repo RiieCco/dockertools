@@ -7,13 +7,28 @@ metadata:
 spec:
   containers:
     - name: zap2
-      image: owasp/zap2docker-weekly
-      args: 
-      - zap-baseline.py
-      - -t
-      - https://demo.securityknowledgeframework.org
-      - -U
-      - <dojo-url>
-      - -A <dojo-api-key>
-      - -I <engagement-id>
+      image: rtencatexebia/owasp-zap
+      env: 
+      - name: target #Get from vault 
+        valueFrom:
+          secretKeyRef:
+            name: owasp-zap-secrets
+            key: target
+      - name: dojo-url #Get from vault 
+        valueFrom:
+          secretKeyRef:
+            name: owasp-zap-secrets
+            key: dojo-url
+      - name: dojo-api-key #Get from vault 
+        valueFrom:
+          secretKeyRef:
+            name: owasp-zap-secrets
+            key: dojo-api-key
+      - name: dojo-engagement-id #Get from vault 
+        valueFrom:
+          secretKeyRef:
+            name: owasp-zap-secrets
+            key: dojo-engagement-id
+      command: ["zap-baseline.py"]
+      args: ["-t", "$(target)", "-U", "$(dojo-url)", "-A", "$(dojo-api-key)", "-I", "$(dojo-engagement-id)"]
   restartPolicy: Never

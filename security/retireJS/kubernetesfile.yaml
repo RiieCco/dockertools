@@ -1,37 +1,32 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: snyk
+  name: retire
   labels:
     app: security-pipeline
 spec:
   containers:
-    - name: snyk
-      image: rtencatexebia/snyk
+    - name: retire
+      image: rtencatexebia/retire
       env: 
       - name: SOURCE_REPO #Get from vault 
         valueFrom:
           secretKeyRef:
-            name: snyk-secrets
+            name: retire-secrets
             key: repository #Get from vault
       - name: DOJO_API_KEY
         valueFrom:
           secretKeyRef:
-            name: snyk-secrets
+            name: retire-secrets
             key: dojo-api-key #Get from vault
       - name: DOJO_URL
         valueFrom:
           secretKeyRef:
-            name: snyk-secrets
+            name: retire-secrets
             key: dojo-url #Get as a secret
       - name: DOJO_ENGAGEMENT_ID
         valueFrom:
           secretKeyRef:
-            name: snyk-secrets
-            key: dojo-engagement-id #Get as a secret
-      - name: SNYK_API_KEY
-        valueFrom:
-          secretKeyRef:
-            name: snyk-secrets
-            key: snyk-api-key #Get as a secret    
+            name: retire-secrets
+            key: dojo-engagement-id #Get as a secret  
   restartPolicy: Never

@@ -97,6 +97,10 @@ def usage():
     print('    -s                short output format - dont show PASSes or example URLs')
     print('    -T                max time in minutes to wait for ZAP to start and the passive scan to run')
     print('    -z zap_options    ZAP command line options e.g. -z "-config aaa=bbb -config ccc=ddd"')
+    print('    -z zap_options    ZAP command line options e.g. -z "-config aaa=bbb -config ccc=ddd"')
+    print('    -U                Defect dojo url endpoint')
+    print('    -A                API key Used to push the metrics to defect-dojo')
+    print('    -I                The engagement id of the project you want to push the metrics to')
     print('')
     print('For more details see https://github.com/zaproxy/zaproxy/wiki/ZAP-Full-Scan')
 
@@ -127,6 +131,10 @@ def main(argv):
     zap_options = ''
     delay = 0
     timeout = 0
+    
+    dojo_url = ''
+    dojo_engagement_id=0
+    dojo_api_key=''
 
     pass_count = 0
     warn_count = 0
@@ -137,7 +145,7 @@ def main(argv):
     fail_inprog_count = 0
 
     try:
-        opts, args = getopt.getopt(argv, "t:c:u:g:m:n:r:J:w:x:l:hdaijp:sz:P:D:T:")
+        opts, args = getopt.getopt(argv, "t:c:u:g:m:n:r:J:w:x:l:hdaijp:sz:P:D:T:U:A:I:")
     except getopt.GetoptError as exc:
         logging.warning('Invalid option ' + exc.opt + ' : ' + exc.msg)
         usage()
@@ -182,6 +190,12 @@ def main(argv):
             info_unspecified = True
         elif opt == '-j':
             ajax = True
+        elif opt == '-U':
+            dojo_url = arg
+        elif opt == '-A':
+            dojo_api_key = arg
+        elif opt == '-I':
+            dojo_engagement_id = arg
         elif opt == '-l':
             try:
                 min_level = zap_conf_lvls.index(arg)
@@ -445,8 +459,19 @@ def main(argv):
                 '\tWARN-NEW: ' + str(warn_count) + '\tWARN-INPROG: ' + str(warn_inprog_count) +
                 '\tINFO: ' + str(info_count) + '\tIGNORE: ' + str(ignore_count) + '\tPASS: ' + str(pass_count))
 
+
+        write_report('result.xml', zap.core.xmlreport())
+      
+        time.sleep(10)
+
+        #command injection problem i recon
+        commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date=2018-05-01 --form verified=False --form file=@result.xml --form tags=Test_automation --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id)
+        foo = os.system(commit_to_dojo)
+        print(foo)
+
         # Stop ZAP
         zap.core.shutdown()
+
 
     except IOError as e:
         if hasattr(e, 'args') and len(e.args) > 1:

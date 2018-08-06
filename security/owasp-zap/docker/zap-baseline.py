@@ -375,11 +375,6 @@ def main(argv):
 
 
         write_report('result.xml', zap.core.xmlreport())
-
-        print(dojo_url)
-        print(dojo_api_key)
-        print(dojo_engagement_id)
-
         time.sleep(10)
 
         #command injection problem i recon
