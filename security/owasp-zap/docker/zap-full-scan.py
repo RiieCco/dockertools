@@ -97,7 +97,6 @@ def usage():
     print('    -s                short output format - dont show PASSes or example URLs')
     print('    -T                max time in minutes to wait for ZAP to start and the passive scan to run')
     print('    -z zap_options    ZAP command line options e.g. -z "-config aaa=bbb -config ccc=ddd"')
-    print('    -z zap_options    ZAP command line options e.g. -z "-config aaa=bbb -config ccc=ddd"')
     print('    -U                Defect dojo url endpoint')
     print('    -A                API key Used to push the metrics to defect-dojo')
     print('    -I                The engagement id of the project you want to push the metrics to')
@@ -326,7 +325,7 @@ def main(argv):
             # The url can include a valid path, but always reset to spider the host
             target = target[0:target.index('/', 8)+1]
 
-        time.sleep(2)
+        time.sleep(200)
 
         # Spider target
         zap_spider(zap, target)
@@ -360,6 +359,7 @@ def main(argv):
 
         # Print out a count of the number of urls
         num_urls = len(zap.core.urls())
+        print(zap.core.urls())
         if num_urls == 0:
             logging.warning('No URLs found - is the target URL accessible? Local services may not be accessible from the Docker container')
         else:
@@ -467,6 +467,7 @@ def main(argv):
         #command injection problem i recon
         commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date=2018-05-01 --form verified=False --form file=@result.xml --form tags=Test_automation --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id)
         foo = os.system(commit_to_dojo)
+        print(os.system('ifconfig'))
         print(foo)
 
         # Stop ZAP
@@ -503,3 +504,15 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv[1:])
+
+
+
+
+
+
+
+
+
+
+
+

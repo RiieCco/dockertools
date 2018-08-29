@@ -272,6 +272,7 @@ def main(argv):
             if res.startswith("ZAP Error"):
                 logging.error('Failed to load context file ' + context_file + ' : ' + res)
 
+        time.sleep(250)
         zap_access_target(zap, target)
 
         if target.count('/') > 2:

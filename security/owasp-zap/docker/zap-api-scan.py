@@ -296,6 +296,8 @@ def main(argv):
     try:
         zap = ZAPv2(proxies={'http': 'http://' + zap_ip + ':' + str(port), 'https': 'http://' + zap_ip + ':' + str(port)})
 
+
+        time.sleep(2)
         wait_for_zap_start(zap, timeout * 60)
 
         if context_file:

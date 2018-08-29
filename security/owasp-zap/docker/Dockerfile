@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -q -y --fix-missing \
 	firefox \
 	xvfb \
 	x11vnc && \
+	ifconfig && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
