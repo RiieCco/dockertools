@@ -54,7 +54,7 @@ import time
 from datetime import datetime
 from zapv2 import ZAPv2
 from zap_common import *
-
+import datetime
 
 config_dict = {}
 config_msg = {}
@@ -108,6 +108,9 @@ def main(argv):
 
     global min_level
     global in_progress_issues
+    dojo_url = ''
+    dojo_engagement_id=0
+    dojo_api_key=''
     cid = ''
     context_file = ''
     progress_file = ''
@@ -130,11 +133,6 @@ def main(argv):
     zap_options = ''
     delay = 0
     timeout = 0
-    
-    dojo_url = ''
-    dojo_engagement_id=0
-    dojo_api_key=''
-
     pass_count = 0
     warn_count = 0
     fail_count = 0
@@ -465,7 +463,8 @@ def main(argv):
         time.sleep(10)
 
         #command injection problem i recon
-        commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date=2018-05-01 --form verified=False --form file=@result.xml --form tags=Test_automation --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id)
+        now = datetime.datetime.now()
+        commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date={3} --form verified=False --form file=@result.xml --form tags=Test_automation --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id, now.strftime("%Y-%m-%d") )
         foo = os.system(commit_to_dojo)
         print(os.system('ifconfig'))
         print(foo)

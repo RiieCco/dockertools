@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/local/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.70 scan initiated Wed Sep 26 12:06:07 2018 as: nmap -sT -sV -p- -P0 -oX result.xml securityknowledgeframework.org -->
+<nmaprun scanner="nmap" args="nmap -sT -sV -p- -P0 -oX result.xml securityknowledgeframework.org" start="1537956367" startstr="Wed Sep 26 12:06:07 2018" version="7.70" xmloutputversion="1.04">
+<scaninfo type="connect" protocol="tcp" numservices="65535" services="1-65535"/>

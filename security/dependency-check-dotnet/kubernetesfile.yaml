@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dependency-check
+  labels:
+    app: security-pipeline
+spec:
+  containers:
+    - name: dependency-check
+      image: rtencatexebia/dependency-check
+      env: 
+      - name: SOURCE_REPO #Get from vault 
+        valueFrom:
+          secretKeyRef:
+            name: dependency-check-secrets
+            key: repository #Get from vault
+      - name: DOJO_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: dependency-check-secrets
+            key: dojo-api-key #Get from vault
+      - name: DOJO_URL
+        valueFrom:
+          secretKeyRef:
+            name: dependency-check-secrets
+            key: dojo-url #Get as a secret
+      - name: DOJO_ENGAGEMENT_ID
+        valueFrom:
+          secretKeyRef:
+            name: dependency-check-secrets
+            key: dojo-engagement-id #Get as a secret    
+  restartPolicy: Never

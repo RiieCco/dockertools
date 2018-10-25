@@ -13,6 +13,7 @@ from datetime import datetime
 from six.moves.urllib.parse import urljoin
 from zapv2 import ZAPv2
 from zap_common import *
+import datetime
 
 
 class NoUrlsException(Exception):
@@ -71,6 +72,9 @@ def main(argv):
 
     global min_level
     global in_progress_issues
+    dojo_url = ''
+    dojo_engagement_id=0
+    dojo_api_key=''
     cid = ''
     context_file = ''
     progress_file = ''
@@ -95,10 +99,6 @@ def main(argv):
     zap_options = ''
     delay = 0
     timeout = 0
-    dojo_url = ''
-    dojo_engagement_id=0
-    dojo_api_key=''
-
     pass_count = 0
     warn_count = 0
     fail_count = 0
@@ -118,6 +118,12 @@ def main(argv):
         if opt == '-h':
             usage()
             sys.exit(0)
+        elif opt == '-U':
+            dojo_url = arg
+        elif opt == '-A':
+            dojo_api_key = arg
+        elif opt == '-I':
+            dojo_engagement_id = arg
         elif opt == '-t':
             target = arg
             logging.debug('Target: ' + target)
@@ -151,12 +157,6 @@ def main(argv):
             zap_alpha = True
         elif opt == '-i':
             info_unspecified = True
-        elif opt == '-U':
-            dojo_url = arg
-        elif opt == '-A':
-            dojo_api_key = arg
-        elif opt == '-I':
-            dojo_engagement_id = arg
         elif opt == '-l':
             try:
                 min_level = zap_conf_lvls.index(arg)
@@ -484,17 +484,12 @@ def main(argv):
         
         
         write_report('result.xml', zap.core.xmlreport())
-
-        print(dojo_url)
-        print(dojo_api_key)
-        print(dojo_engagement_id)
-
         time.sleep(10)
+        now = datetime.datetime.now()
 
-        #command injection problem i recon
-        commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date=2018-05-01 --form verified=False --form file=@result.xml --form tags=API_SCAN --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id)
-        foo = os.system(commit_to_dojo)
-        print(foo)
+        commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date={3} --form verified=False --form file=@result.xml --form tags=API_SCAN --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id, now.strftime("%Y-%m-%d"))
+        reporting = os.system(commit_to_dojo)
+        print(reporting)
 
 
         # Stop ZAP
