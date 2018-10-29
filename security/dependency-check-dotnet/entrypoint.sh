@@ -34,5 +34,5 @@ mono /project/.nuget/NuGet.exe restore /project/Vattenfall.NL.Services.MijnNuon.
 
 cat "${OUTPUT_FOLDER}/dependency-check-report.xml"
 
-scanDate = date "+%y-%m-%d"
-curl -k --request POST --url "${DOJO_URL}"/api/v1/importscan/ --header 'authorization: ApiKey '"${DOJO_API_KEY}"' ' --header 'cache-control: no-cache' --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' --form minimum_severity=Info --form scan_date="${scanDate}" --form verified=False --form file=@"${OUTPUT_FOLDER}"/dependency-check-report.xml --form tags=Test_automation --form active=True --form engagement=/api/v1/engagements/"${DOJO_ENGAGEMENT_ID}"/ --form 'scan_type=Dependency Check Scan'
+SCAN_DATE=`date +%Y-%m-%d`
+curl -k --request POST --url "${DOJO_URL}"/api/v1/importscan/ --header 'authorization: ApiKey '"${DOJO_API_KEY}"' ' --header 'cache-control: no-cache' --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' --form minimum_severity=Info --form scan_date="${SCAN_DATE}" --form verified=False --form file=@"${OUTPUT_FOLDER}"/dependency-check-report.xml --form tags=Test_automation --form active=True --form engagement=/api/v1/engagements/"${DOJO_ENGAGEMENT_ID}"/ --form 'scan_type=Dependency Check Scan'

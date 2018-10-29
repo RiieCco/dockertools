@@ -24,7 +24,6 @@ mkdir -p "${OUTPUT_FOLDER}"
 
 cd /"${OUTPUT_FOLDER}"
 
-mvn package -DskipTests --fail-never
 
 /opt/dependency-check/bin/dependency-check.sh \
     --project "${PROJECT_FOLDER}" \

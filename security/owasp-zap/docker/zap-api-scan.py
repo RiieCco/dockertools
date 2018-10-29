@@ -486,7 +486,6 @@ def main(argv):
         write_report('result.xml', zap.core.xmlreport())
         time.sleep(10)
         now = datetime.datetime.now()
-
         commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date={3} --form verified=False --form file=@result.xml --form tags=API_SCAN --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id, now.strftime("%Y-%m-%d"))
         reporting = os.system(commit_to_dojo)
         print(reporting)

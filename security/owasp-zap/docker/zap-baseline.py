@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-
-
 import getopt
 import logging
 import os
@@ -272,7 +270,7 @@ def main(argv):
             if res.startswith("ZAP Error"):
                 logging.error('Failed to load context file ' + context_file + ' : ' + res)
 
-        time.sleep(250)
+        #time.sleep(250)
         zap_access_target(zap, target)
 
         if target.count('/') > 2:
@@ -380,8 +378,8 @@ def main(argv):
 
         #command injection problem i recon
         now = datetime.datetime.now()
-
-        commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date={3} --form verified=False --form file=@result.xml --form tags=Test_automation --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id,  now.strftime("%Y-%m-%d"))
+        zapDate = now.strftime("%Y-%m-%d")
+        commit_to_dojo = 'curl --request POST --url {0}/api/v1/importscan/ --header \'authorization: ApiKey {1}\' --header \'cache-control: no-cache\' --header \'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW\' --form minimum_severity=Info --form scan_date={3} --form verified=False --form file=@result.xml --form tags=Test_automation --form active=True --form engagement=/api/v1/engagements/{2}/ --form \'scan_type=ZAP Scan\''.format(dojo_url, dojo_api_key, dojo_engagement_id, zapDate)
         foo = os.system(commit_to_dojo)
         print(foo)
 
