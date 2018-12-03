@@ -25,4 +25,4 @@ sonar-scanner -Dsonar.host.url=http://172.16.245.94:9000 \
   -Dsonar.dotnet.excludeGeneratedCode=true \
   -Dsonar.dotnet.4.0.sdk.directory=C:/Windows/Microsoft.NET/Framework/v4.0.30319 \
   -Dsonar.dotnet.version=4.5.2 \
-  -Dsonar.password=2bdc8575dde796bc8743b1521997a0a23a54a714
+  -Dsonar.password=<pass>
