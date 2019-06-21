@@ -7,26 +7,16 @@ exit_env_error() {
     exit 1
 }
 
-PROJECT_FOLDER="${PROJECT_FOLDER:-/project}"
-OUTPUT_FORMAT="${OUTPUT_FORMAT:-json}"
-
-
 [ -z "${SOURCE_REPO}" ] && exit_env_error SOURCE_REPO
 [ -z "${DOJO_URL}" ] && exit_env_error DOJO_URL
 [ -z "${DOJO_ENGAGEMENT_ID}" ] && exit_env_error DOJO_ENGAGEMENT_ID
 [ -z "${DOJO_API_KEY}" ] && exit_env_error DOJO_API_KEY
 
-git clone "${SOURCE_REPO}" "${PROJECT_FOLDER}"
-
-cd /"${PROJECT_FOLDER}"
-
-bandit -r . \
-    --format "${OUTPUT_FORMAT}" \
-    --output "bandit-report.${OUTPUT_FORMAT}" | exit 0
-
+trufflehog --regex --json --entropy=False "${SOURCE_REPO}" > output.json | exit 0
+ls -lart
+cat output.json
 
 SCAN_DATE=`date +%Y-%m-%d`
-
 
 curl --request POST \
     --url "${DOJO_URL}"/api/v1/importscan/ \
@@ -36,8 +26,8 @@ curl --request POST \
     --form minimum_severity=Info \
     --form scan_date="${SCAN_DATE}" \
     --form verified=False \
-    --form file=@"${PROJECT_FOLDER}"/bandit-report."${OUTPUT_FORMAT}" \
+    --form file=@"${PROJECT_FOLDER}"/output.json \
     --form tags=Test_automation \
     --form active=True \
     --form engagement=/api/v1/engagements/"${DOJO_ENGAGEMENT_ID}"/ \
-    --form 'scan_type=Bandit Scan'
+    --form 'scan_type=Trufflehog Scan'

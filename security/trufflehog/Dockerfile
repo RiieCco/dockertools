@@ -1,8 +1,8 @@
-FROM python:2.7
+FROM python:3.7.3
 
 RUN apt-get update -y && apt-get upgrade -y && apt-get install curl
 
-RUN pip install bandit
+RUN pip3 install trufflehog
 
 COPY entrypoint.sh entrypoint.sh
 
